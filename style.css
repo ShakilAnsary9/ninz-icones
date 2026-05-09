@@ -1,38 +1,45 @@
 /* ─── Reset & Root ─────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 :root {
   /* Colors */
-  --bg:           #0e0e10;
-  --bg-2:         #141416;
-  --bg-3:         #1a1a1e;
-  --bg-4:         #202026;
-  --border:       rgba(255,255,255,0.07);
-  --border-hover: rgba(255,255,255,0.15);
-  --text-1:       #f0f0f2;
-  --text-2:       #8a8a96;
-  --text-3:       #555560;
-  --accent:       #e2ff5d;
-  --accent-dim:   rgba(226,255,93,0.12);
-  --accent-glow:  rgba(226,255,93,0.25);
-  --danger:       #ff5d5d;
+  --bg: #0e0e10;
+  --bg-2: #141416;
+  --bg-3: #1a1a1e;
+  --bg-4: #202026;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --text-1: #f0f0f2;
+  --text-2: #8a8a96;
+  --text-3: #555560;
+  --accent: #e2ff5d;
+  --accent-dim: rgba(226, 255, 93, 0.12);
+  --accent-glow: rgba(226, 255, 93, 0.25);
+  --danger: #ff5d5d;
 
   /* Sizes */
-  --sidebar-w:    210px;
-  --topbar-h:     68px;
-  --card-size:    110px;
-  --radius-card:  14px;
-  --radius-sm:    8px;
-  --radius-pill:  999px;
+  --sidebar-w: 210px;
+  --topbar-h: 68px;
+  --card-size: 110px;
+  --radius-card: 14px;
+  --radius-sm: 8px;
+  --radius-pill: 999px;
 
   /* Font */
-  --font:         'Syne', sans-serif;
-  --font-mono:    'JetBrains Mono', monospace;
+  --font: "Syne", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   background: var(--bg);
   color: var(--text-1);
@@ -193,7 +200,9 @@ html, body {
   font-weight: 500;
   letter-spacing: 0.2px;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   text-align: left;
 }
 
@@ -237,7 +246,9 @@ html, body {
   font-weight: 500;
   letter-spacing: 0.2px;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
   text-decoration: none;
 }
 
@@ -313,13 +324,17 @@ html, body {
   font-family: var(--font);
   font-size: 13.5px;
   outline: none;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
 }
 
-#search::placeholder { color: var(--text-3); }
+#search::placeholder {
+  color: var(--text-3);
+}
 
 #search:focus {
-  border-color: rgba(226,255,93,0.35);
+  border-color: rgba(226, 255, 93, 0.35);
   background: var(--bg-4);
 }
 
@@ -340,7 +355,9 @@ html, body {
   transition: color 0.15s;
 }
 
-.search-kbd:hover { color: var(--text-1); }
+.search-kbd:hover {
+  color: var(--text-1);
+}
 
 .topbar-right {
   display: flex;
@@ -366,9 +383,16 @@ html, body {
   scrollbar-color: var(--bg-4) transparent;
 }
 
-.grid-wrap::-webkit-scrollbar { width: 5px; }
-.grid-wrap::-webkit-scrollbar-track { background: transparent; }
-.grid-wrap::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 99px; }
+.grid-wrap::-webkit-scrollbar {
+  width: 5px;
+}
+.grid-wrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+.grid-wrap::-webkit-scrollbar-thumb {
+  background: var(--bg-4);
+  border-radius: 99px;
+}
 
 .grid {
   display: grid;
@@ -385,13 +409,22 @@ html, body {
   cursor: pointer;
   overflow: hidden;
   aspect-ratio: 1;
-  transition: border-color 0.18s, background 0.18s, transform 0.15s;
+  transition:
+    border-color 0.18s,
+    background 0.18s,
+    transform 0.15s;
   animation: fadeIn 0.25s ease both;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.94); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .icon-card:hover {
@@ -411,7 +444,9 @@ html, body {
   justify-content: center;
   gap: 9px;
   padding: 12px 8px 10px;
-  transition: opacity 0.18s, transform 0.18s;
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
 }
 
 /* No flip effect - just simple hover */
@@ -452,8 +487,13 @@ html, body {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50%       { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .empty-text {
@@ -486,7 +526,10 @@ html, body {
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
 }
 
 #load-more:hover {
@@ -511,10 +554,12 @@ html, body {
   border-radius: var(--radius-pill);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s, transform 0.2s;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
   white-space: nowrap;
   letter-spacing: 0.2px;
-  box-shadow: 0 4px 20px rgba(226,255,93,0.3);
+  box-shadow: 0 4px 20px rgba(226, 255, 93, 0.3);
 }
 
 .toast.show {
@@ -539,7 +584,9 @@ html, body {
   white-space: nowrap;
 }
 
-.tooltip.show { opacity: 1; }
+.tooltip.show {
+  opacity: 1;
+}
 
 /* ─── Theme Toggle ───────────────────────────────────── */
 .theme-toggle {
@@ -553,7 +600,10 @@ html, body {
   background: var(--bg-3);
   color: var(--text-2);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .theme-toggle:hover {
@@ -567,26 +617,34 @@ html, body {
   height: 18px;
 }
 
-.theme-toggle .icon-sun { display: none; }
-.theme-toggle .icon-moon { display: block; }
+.theme-toggle .icon-sun {
+  display: none;
+}
+.theme-toggle .icon-moon {
+  display: block;
+}
 
-body.light .theme-toggle .icon-sun { display: block; }
-body.light .theme-toggle .icon-moon { display: none; }
+body.light .theme-toggle .icon-sun {
+  display: block;
+}
+body.light .theme-toggle .icon-moon {
+  display: none;
+}
 
 /* ─── Light Theme ─────────────────────────────────────── */
 body.light {
-  --bg:           #f8f9fc;
-  --bg-2:         #ffffff;
-  --bg-3:         #f0f2f5;
-  --bg-4:         #e4e7ec;
-  --border:       rgba(0,0,0,0.08);
-  --border-hover: rgba(0,0,0,0.18);
-  --text-1:       #1a1a1e;
-  --text-2:       #5a5a6e;
-  --text-3:       #9494a8;
-  --accent:       #0ea5e2;
-  --accent-dim:   rgba(14,165,227,0.12);
-  --accent-glow:  rgba(14,165,227,0.25);
+  --bg: #f8f9fc;
+  --bg-2: #ffffff;
+  --bg-3: #f0f2f5;
+  --bg-4: #e4e7ec;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-hover: rgba(0, 0, 0, 0.18);
+  --text-1: #1a1a1e;
+  --text-2: #5a5a6e;
+  --text-3: #9494a8;
+  --accent: #0ea5e2;
+  --accent-dim: rgba(14, 165, 227, 0.12);
+  --accent-glow: rgba(14, 165, 227, 0.25);
 }
 
 body.light .icon-img {
@@ -594,7 +652,10 @@ body.light .icon-img {
 }
 
 /* ─── Scrollbar ─────────────────────────────────────────── */
-* { scrollbar-width: thin; scrollbar-color: var(--bg-4) transparent; }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-4) transparent;
+}
 
 /* ─── Icon Modal ─────────────────────────────────────────── */
 .modal {
@@ -658,7 +719,18 @@ body.light .icon-img {
   background: var(--bg-3);
   padding: 6px;
   object-fit: contain;
+  border: 1px solid var(--border);
+}
+
+.modal-preview-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   filter: invert(1) brightness(0.88);
+}
+
+body.light .modal-preview-img img {
+  filter: none;
 }
 
 .modal-icon-name {
@@ -679,7 +751,9 @@ body.light .icon-img {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .modal-close:hover {
@@ -712,7 +786,10 @@ body.light .icon-img {
   font-size: 11px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .modal-btn:hover {
@@ -732,7 +809,7 @@ body.light .icon-img {
 }
 
 body.light .modal-preview-img {
-  filter: invert(0) brightness(0.25);
+  filter: none;
 }
 
 /* ─── Color Picker Modal ─────────────────────────────────── */
@@ -802,7 +879,9 @@ body.light .modal-preview-img {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .color-modal-close:hover {
@@ -966,7 +1045,9 @@ body.light .modal-preview-img {
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.15s, transform 0.15s;
+  transition:
+    background 0.15s,
+    transform 0.15s;
 }
 
 .download-btn:hover {

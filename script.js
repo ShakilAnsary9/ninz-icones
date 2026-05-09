@@ -201,7 +201,9 @@ function openColorPickerModal() {
   });
 
   // Clear preset buttons active state
-  document.querySelectorAll(".preset-btn").forEach((btn) => btn.classList.remove("active"));
+  document
+    .querySelectorAll(".preset-btn")
+    .forEach((btn) => btn.classList.remove("active"));
 
   // Update preview
   updateColorPickerPreview(currentIcon.imgSrc, pngColor);
@@ -233,7 +235,7 @@ function openModal(name, imgSrc) {
 
   // Update modal header with icon preview
   modalContent.querySelector(".modal-icon-preview").innerHTML = `
-    <img src="${imgSrc}" alt="${name}" class="modal-preview-img" />
+    <div class="modal-preview-img"><img src="${imgSrc}" alt="${name}" /></div>
     <span class="modal-icon-name">${name}</span>
   `;
 
@@ -320,29 +322,27 @@ function copyToClipboard(text, msg) {
   let cleanedText = text
     .replace(/<!--[\s\S]*?-->/g, "")
     .replace(/<script[\s\S]*?<\/script>/gi, "")
-    .replace(/\n\s*\n/g, "\n")  // Remove multiple newlines
-    .replace(/\s+\n/g, "\n")    // Remove whitespace before newlines
-    .replace(/\n\s+/g, "\n")   // Remove newlines with trailing whitespace
+    .replace(/\n\s*\n/g, "\n") // Remove multiple newlines
+    .replace(/\s+\n/g, "\n") // Remove whitespace before newlines
+    .replace(/\n\s+/g, "\n") // Remove newlines with trailing whitespace
     .trim();
 
   // Always show toast first to ensure visibility
   showToast(msg);
 
-  navigator.clipboard
-    .writeText(cleanedText)
-    .catch(() => {
-      /* Fallback */
-      try {
-        const ta = document.createElement("textarea");
-        ta.value = cleanedText;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        ta.remove();
-      } catch (e) {
-        console.error("Copy failed:", e);
-      }
-    });
+  navigator.clipboard.writeText(cleanedText).catch(() => {
+    /* Fallback */
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = cleanedText;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    } catch (e) {
+      console.error("Copy failed:", e);
+    }
+  });
 }
 
 function downloadFile(filename, content, type) {
@@ -472,7 +472,9 @@ function handleModalAction(action, btn) {
   }
 
   if (action === "copy-cdn") {
-    const tagCode = `<i class="si si-${style} si-${name}"></i>`;
+    // Strip style suffix from name (e.g., "4k-bold" -> "4k")
+    const baseName = name.replace(new RegExp(`-${style}$`), "");
+    const tagCode = `<i class="si si-${style} si-${baseName}"></i>`;
     copyToClipboard(tagCode, "Tag copied!");
   }
 
@@ -518,7 +520,9 @@ colorModalEl.addEventListener("click", (e) => {
   }
 });
 
-document.getElementById("color-modal-close").addEventListener("click", closeColorModal);
+document
+  .getElementById("color-modal-close")
+  .addEventListener("click", closeColorModal);
 
 // Color input change - update preview
 document.getElementById("png-color-input").addEventListener("input", (e) => {
@@ -526,7 +530,9 @@ document.getElementById("png-color-input").addEventListener("input", (e) => {
   document.getElementById("png-color-hex").textContent = pngColor.toUpperCase();
   document.getElementById("png-color-input").value = pngColor;
   // Remove active from preset buttons
-  document.querySelectorAll(".preset-btn").forEach((b) => b.classList.remove("active"));
+  document
+    .querySelectorAll(".preset-btn")
+    .forEach((b) => b.classList.remove("active"));
   if (currentIcon) {
     updateColorPickerPreview(currentIcon.imgSrc, pngColor);
   }
@@ -539,7 +545,9 @@ document.querySelectorAll(".preset-btn").forEach((btn) => {
     pngColor = color;
     document.getElementById("png-color-input").value = color;
     document.getElementById("png-color-hex").textContent = color.toUpperCase();
-    document.querySelectorAll(".preset-btn").forEach((b) => b.classList.remove("active"));
+    document
+      .querySelectorAll(".preset-btn")
+      .forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     if (currentIcon) {
       updateColorPickerPreview(currentIcon.imgSrc, color);
@@ -550,21 +558,25 @@ document.querySelectorAll(".preset-btn").forEach((btn) => {
 // Size buttons
 document.querySelectorAll(".size-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".size-btn").forEach((b) => b.classList.remove("active"));
+    document
+      .querySelectorAll(".size-btn")
+      .forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     pngSize = parseInt(btn.dataset.size);
   });
 });
 
 // Download button
-document.getElementById("download-colored-png").addEventListener("click", () => {
-  if (!currentIcon) return;
+document
+  .getElementById("download-colored-png")
+  .addEventListener("click", () => {
+    if (!currentIcon) return;
 
-  fetchSvgText(currentIcon.imgSrc).then((text) => {
-    const coloredSvg = applySvgColor(text, pngColor);
-    downloadPngWithSize(currentIcon.name, coloredSvg, pngSize);
+    fetchSvgText(currentIcon.imgSrc).then((text) => {
+      const coloredSvg = applySvgColor(text, pngColor);
+      downloadPngWithSize(currentIcon.name, coloredSvg, pngSize);
+    });
   });
-});
 
 function downloadPngWithSize(name, svgText, size) {
   const canvas = document.createElement("canvas");
