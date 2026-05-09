@@ -34,10 +34,50 @@ const tooltipEl = document.getElementById("tooltip");
 const tabs = document.querySelectorAll(".tab");
 
 /* ── Boot ───────────────────────────────────────────────── */
+function generateIconCSS(icons) {
+  let css = "/* Auto-generated icon CSS */\n";
+
+  const styles = {
+    "bold": "bold",
+    "bold-duotone": "bold-duotone",
+    "broken": "broken",
+    "duotone": "duotone",
+    "linear": "linear",
+    "outline": "outline"
+  };
+
+  for (const [styleKey, folder] of Object.entries(styles)) {
+    const names = icons[styleKey] || [];
+    names.forEach(name => {
+      // Create clean class name: "4k-bold" -> "4k"
+      const cleanName = name.replace(/-(bold|duotone|broken|linear|outline)(-duotone)?$/, "");
+      const svgFile = `${name}.svg`;
+      css += `.si-${styleKey}.si-${cleanName} {\n`;
+      css += `  -webkit-mask-image: url("../../icons/${folder}/${svgFile}");\n`;
+      css += `  mask-image: url("../../icons/${folder}/${svgFile}");\n`;
+      css += `}\n`;
+      css += `.si-${cleanName} { --si-name: ${cleanName}; }\n`;
+    });
+  }
+
+  return css;
+}
+
+function injectIconCSS(icons) {
+  const existing = document.getElementById("si-dynamic-css");
+  if (existing) existing.remove();
+
+  const style = document.createElement("style");
+  style.id = "si-dynamic-css";
+  style.textContent = generateIconCSS(icons);
+  document.head.appendChild(style);
+}
+
 fetch("icons.json")
   .then((r) => r.json())
   .then((data) => {
     allIcons = data;
+    injectIconCSS(data);
     applyFilter();
   })
   .catch(() => {
