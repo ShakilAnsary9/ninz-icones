@@ -512,9 +512,7 @@ function handleModalAction(action, btn) {
   }
 
   if (action === "copy-cdn") {
-    // Strip style suffix from name (e.g., "4k-bold" -> "4k")
-    const baseName = name.replace(new RegExp(`-${style}$`), "");
-    const tagCode = `<i class="si si-${style} si-${baseName}"></i>`;
+    const tagCode = `<i class="si si-${name}"></i>`;
     copyToClipboard(tagCode, "Tag copied!");
   }
 

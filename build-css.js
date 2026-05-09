@@ -49,17 +49,9 @@ let css = `/*!
 for (const [styleKey, folder] of Object.entries(folderMap)) {
   const names = icons[styleKey] || [];
   names.forEach(name => {
-    // Strip style suffix
-    let cleanName = name;
-    if (styleKey === "duotone") {
-      cleanName = name.replace(/-line-duotone$/, "").replace(/-duotone$/, "");
-    } else {
-      cleanName = name.replace(new RegExp(`-${styleKey}$`), "");
-    }
-
-    css += `.si-${styleKey}.si-${cleanName} {\n`;
-    css += `  -webkit-mask-image: url("${CDN_BASE}/${folder}/${name}.svg");\n`;
-    css += `  mask-image: url("${CDN_BASE}/${folder}/${name}.svg");\n`;
+    css += `.si-${name} {\n`;
+    css += `  -webkit-mask-image: url("../../icons/${folder}/${name}.svg");\n`;
+    css += `  mask-image: url("../../icons/${folder}/${name}.svg");\n`;
     css += `}\n`;
   });
 }

@@ -28,27 +28,27 @@
 .si-2xl { font-size: 3rem; }
 
 /* ── Icons ───────────────────────────────────────────────── */
-.si-bold.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/bold/4k-bold.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/bold/4k-bold.svg");
+.si-4k-bold {
+  -webkit-mask-image: url("../../icons/bold/4k-bold.svg");
+  mask-image: url("../../icons/bold/4k-bold.svg");
 }
-.si-bold-duotone.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/bold-duotone/4k-bold-duotone.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/bold-duotone/4k-bold-duotone.svg");
+.si-4k-bold-duotone {
+  -webkit-mask-image: url("../../icons/bold-duotone/4k-bold-duotone.svg");
+  mask-image: url("../../icons/bold-duotone/4k-bold-duotone.svg");
 }
-.si-broken.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/broken/4k-broken.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/broken/4k-broken.svg");
+.si-4k-broken {
+  -webkit-mask-image: url("../../icons/broken/4k-broken.svg");
+  mask-image: url("../../icons/broken/4k-broken.svg");
 }
-.si-duotone.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/duotone/4k-line-duotone.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/duotone/4k-line-duotone.svg");
+.si-4k-line-duotone {
+  -webkit-mask-image: url("../../icons/duotone/4k-line-duotone.svg");
+  mask-image: url("../../icons/duotone/4k-line-duotone.svg");
 }
-.si-linear.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/linear/4k-linear.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/linear/4k-linear.svg");
+.si-4k-linear {
+  -webkit-mask-image: url("../../icons/linear/4k-linear.svg");
+  mask-image: url("../../icons/linear/4k-linear.svg");
 }
-.si-outline.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/outline/4k-outline.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons/outline/4k-outline.svg");
+.si-4k-outline {
+  -webkit-mask-image: url("../../icons/outline/4k-outline.svg");
+  mask-image: url("../../icons/outline/4k-outline.svg");
 }
