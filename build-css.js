@@ -1,9 +1,3 @@
-/**
- * Sora Icônes — Build CSS
- * Generates sora-icons.css from icons.json
- * Run: node build-css.js
- */
-
 const fs = require("fs");
 const path = require("path");
 
@@ -17,6 +11,8 @@ const folderMap = {
   "linear": "linear",
   "outline": "outline"
 };
+
+const CDN_BASE = "https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons";
 
 let css = `/*!
  * Sora Icônes — Auto-generated CSS
@@ -53,7 +49,7 @@ let css = `/*!
 for (const [styleKey, folder] of Object.entries(folderMap)) {
   const names = icons[styleKey] || [];
   names.forEach(name => {
-    // Strip style suffix: "4k-bold" -> "4k", "4k-line-duotone" -> "4k"
+    // Strip style suffix
     let cleanName = name;
     if (styleKey === "duotone") {
       cleanName = name.replace(/-line-duotone$/, "").replace(/-duotone$/, "");
@@ -61,10 +57,9 @@ for (const [styleKey, folder] of Object.entries(folderMap)) {
       cleanName = name.replace(new RegExp(`-${styleKey}$`), "");
     }
 
-    // Icon-specific CSS
     css += `.si-${styleKey}.si-${cleanName} {\n`;
-    css += `  -webkit-mask-image: url("../../icons/${folder}/${name}.svg");\n`;
-    css += `  mask-image: url("../../icons/${folder}/${name}.svg");\n`;
+    css += `  -webkit-mask-image: url("${CDN_BASE}/${folder}/${name}.svg");\n`;
+    css += `  mask-image: url("${CDN_BASE}/${folder}/${name}.svg");\n`;
     css += `}\n`;
   });
 }
