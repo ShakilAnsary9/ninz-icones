@@ -127,7 +127,7 @@
 
 /* ── Zero-JS alternative (uncomment & repeat per icon) ──── */
 
-.si-bold.si-4k {
+.si-bold.si-4k-bold {
   -webkit-mask-image: url("../../icons/bold/4k-bold.svg");
   mask-image: url("../../icons/bold/4k-bold.svg");
 }
