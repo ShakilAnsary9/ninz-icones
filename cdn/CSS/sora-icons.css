@@ -127,13 +127,43 @@
 
 /* ── Zero-JS alternative (uncomment & repeat per icon) ──── */
 
-.si-bold.si-4k-bold {
-  -webkit-mask-image: url("../../icons/bold/4k-bold.svg");
-  mask-image: url("../../icons/bold/4k-bold.svg");
+/* Bold */
+.si-bold.si-4k {
+  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/4k-bold.svg");
+  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/4k-bold.svg");
+}
+
+/* Bold Duotone */
+.si-bold-duotone.si-4k {
+  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/4k-bold-duotone.svg");
+  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/4k-bold-duotone.svg");
+}
+
+/* Broken */
+.si-broken.si-4k {
+  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/4k-broken.svg");
+  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/4k-broken.svg");
+}
+
+/* Duotone */
+.si-duotone.si-4k {
+  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/4k-line-duotone.svg");
+  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/4k-line-duotone.svg");
+}
+
+/* Linear */
+.si-linear.si-4k {
+  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/4k-linear.svg");
+  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/4k-linear.svg");
+}
+
+/* Outline */
+.si-outline.si-4k {
+  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/4k-outline.svg");
+  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/4k-outline.svg");
 }
 
 /* ── Icon name → custom property (used by the JS shim) ──── */
-/* Add one line per icon name */
-.si-4k-bold {
-  --si-name: 4k-bold;
+.si-4k {
+  --si-name: 4k;
 }
