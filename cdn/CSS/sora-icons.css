@@ -1,8 +1,15 @@
 /*!
- * Sora Icônes — Auto-generated CSS
- * Generated from icons.json
+ * Sora Icônes — CSS CDN
+ * Usage:  <i class="si si-bold si-alarm"></i>
+ * CDN:    https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/CSS/sora-icons.css
  */
 
+/* ── Base CDN URL ────────────────────────────────────────── */
+:root {
+  --si-cdn: "https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/cdn/icons";
+}
+
+/* ── Base ────────────────────────────────────────────────── */
 [class^="si-"],
 [class*=" si-"] {
   display: inline-block;
@@ -17,6 +24,26 @@
   mask-size: contain;
   vertical-align: -0.125em;
   line-height: 1;
+}
+
+/* ── Style variants (each with its own path) ──────────────── */
+.si-bold {
+  --si-path: var(--si-cdn) + "/bold/";
+}
+.si-bold-duotone {
+  --si-path: var(--si-cdn) + "/bold-duotone/";
+}
+.si-broken {
+  --si-path: var(--si-cdn) + "/broken/";
+}
+.si-duotone {
+  --si-path: var(--si-cdn) + "/duotone/";
+}
+.si-linear {
+  --si-path: var(--si-cdn) + "/linear/";
+}
+.si-outline {
+  --si-path: var(--si-cdn) + "/outline/";
 }
 
 /* ── Size helpers ────────────────────────────────────────── */
@@ -39,28 +66,14 @@
   font-size: 3rem;
 }
 
-/* ── Icons ───────────────────────────────────────────────── */
+/* ── Icons (must use full hardcoded URLs - Test CSS can't concat) ─ */
+/* Bold */
 .si-bold.si-4k {
   -webkit-mask-image: url("../../icons/bold/4k-bold.svg");
   mask-image: url("../../icons/bold/4k-bold.svg");
 }
-.si-bold-duotone.si-4k {
-  -webkit-mask-image: url("../../icons/bold-duotone/4k-bold-duotone.svg");
-  mask-image: url("../../icons/bold-duotone/4k-bold-duotone.svg");
-}
-.si-broken.si-4k {
-  -webkit-mask-image: url("../../icons/broken/4k-broken.svg");
-  mask-image: url("../../icons/broken/4k-broken.svg");
-}
-.si-duotone.si-4k {
-  -webkit-mask-image: url("../../icons/duotone/4k-line-duotone.svg");
-  mask-image: url("../../icons/duotone/4k-line-duotone.svg");
-}
-.si-linear.si-4k {
-  -webkit-mask-image: url("../../icons/linear/4k-linear.svg");
-  mask-image: url("../../icons/linear/4k-linear.svg");
-}
-.si-outline.si-4k {
-  -webkit-mask-image: url("../../icons/outline/4k-outline.svg");
-  mask-image: url("../../icons/outline/4k-outline.svg");
+
+/* ── Icon name → custom property (used by the JS shim) ──── */
+.si-4k {
+  --si-name: 4k;
 }
