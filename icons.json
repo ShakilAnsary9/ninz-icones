@@ -1,0 +1,8 @@
+{
+  "bold": ["4k-bold"],
+  "bold-duotone": ["4k-bold-duotone"],
+  "broken": ["4k-broken"],
+  "duotone": ["4k-line-duotone"],
+  "linear": ["4k-linear"],
+  "outline": ["4k-outline"]
+}

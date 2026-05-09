@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sora Icônes — CDN Docs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0c0c0f;
+      --bg-2:     #131317;
+      --bg-3:     #1b1b22;
+      --bg-4:     #222229;
+      --border:   rgba(255,255,255,0.07);
+      --text-1:   #f2f2f5;
+      --text-2:   #8a8a9a;
+      --text-3:   #50505f;
+      --accent:   #e2ff5d;
+      --accent-d: rgba(226,255,93,0.10);
+      --green:    #5dffa0;
+      --blue:     #5db8ff;
+      --pink:     #ff5db8;
+      --font:     'Syne', sans-serif;
+      --mono:     'JetBrains Mono', monospace;
+      --r:        12px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text-1);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── Layout ─────────────────────────────────────────── */
+    .page { max-width: 860px; margin: 0 auto; padding: 0 24px 100px; }
+
+    /* ── Hero ───────────────────────────────────────────── */
+    .hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 64px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 68px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--text-2);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg-2);
+      color: var(--text-2);
+      letter-spacing: 0.3px;
+    }
+
+    .badge.green { border-color: rgba(93,255,160,0.25); background: rgba(93,255,160,0.07); color: var(--green); }
+    .badge.blue  { border-color: rgba(93,184,255,0.25); background: rgba(93,184,255,0.07); color: var(--blue); }
+    .badge.pink  { border-color: rgba(255,93,184,0.25); background: rgba(255,93,184,0.07); color: var(--pink); }
+
+    /* ── Section ────────────────────────────────────────── */
+    .section { margin-bottom: 56px; }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .section-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: var(--accent-d);
+      border: 1px solid rgba(226,255,93,0.2);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--mono);
+    }
+
+    .section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .section p {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    /* ── Method card ────────────────────────────────────── */
+    .method-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .method-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-3);
+    }
+
+    .method-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-2);
+      letter-spacing: 0.3px;
+    }
+
+    .method-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .method-dot.css  { background: var(--blue); }
+    .method-dot.js   { background: var(--accent); }
+    .method-dot.wc   { background: var(--green); }
+    .method-dot.html { background: var(--pink); }
+
+    .copy-btn {
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-4);
+      color: var(--text-2);
+      font-family: var(--mono);
+      font-size: 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .copy-btn:hover { background: var(--accent-d); color: var(--accent); border-color: rgba(226,255,93,0.2); }
+    .copy-btn.copied { color: var(--green); border-color: rgba(93,255,160,0.3); }
+
+    .code-block {
+      padding: 18px 20px;
+      overflow-x: auto;
+    }
+
+    pre {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.8;
+      color: var(--text-1);
+      white-space: pre;
+    }
+
+    .hl-tag    { color: var(--pink); }
+    .hl-attr   { color: var(--blue); }
+    .hl-val    { color: var(--green); }
+    .hl-cmt    { color: var(--text-3); font-style: italic; }
+    .hl-str    { color: var(--accent); }
+    .hl-url    { color: var(--blue); text-decoration: underline; opacity: .8; }
+
+    /* ── Attributes table ───────────────────────────────── */
+    .attr-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .attr-table th {
+      text-align: left;
+      padding: 10px 14px;
+      background: var(--bg-3);
+      color: var(--text-2);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .attr-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-2);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .attr-table tr:last-child td { border-bottom: none; }
+
+    .attr-table td:first-child {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--blue);
+      white-space: nowrap;
+    }
+
+    .attr-table td:nth-child(2) {
+      color: var(--text-3);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    /* ── Tip ────────────────────────────────────────────── */
+    .tip {
+      display: flex;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid rgba(226,255,93,0.15);
+      background: rgba(226,255,93,0.05);
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+    .tip-icon { color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Divider ────────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    /* ── Toast ──────────────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--accent);
+      color: #000;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 18px;
+      border-radius: 999px;
+      opacity: 0;
+      transition: opacity .2s, transform .2s;
+      pointer-events: none;
+      z-index: 999;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-eyebrow">CDN Documentation</div>
+    <h1>Sora<br/><span>Icônes</span></h1>
+    <p class="hero-sub">
+      A beautiful open-source icon library. Drop in a single line and get
+      access to thousands of icons across 5 styles — no build tools required.
+    </p>
+    <div class="hero-badges">
+      <span class="badge green">✦ 5 styles</span>
+      <span class="badge blue">⚡ jsDelivr CDN</span>
+      <span class="badge pink">◈ Web Component + CSS</span>
+    </div>
+  </header>
+
+  <!-- Method 1: CSS -->
+  <section class="section">
+    <div class="section-label">
+      <div class="section-num">01</div>
+      <h2>CSS Method — Class-based</h2>
+    </div>
+    <p>The simplest way. Add one stylesheet, then use <code style="font-family:var(--mono);font-size:12px;color:var(--blue);">&lt;i&gt;</code> tags with classes anywhere in your HTML. No JavaScript required.</p>
+
+    <!-- Step 1 -->
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot css"></span> Step 1 — Add to your &lt;head&gt;</div>
+        <button class="copy-btn" data-copy='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/cdn/sora-icons.css"/&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/cdn/sora-icons-shim.js"&gt;&lt;/script&gt;'>Copy</button>
+      </div>
+      <div class="code-block"><pre><span class="hl-cmt">&lt;!-- Sora Icônes CSS --&gt;</span>
+<span class="hl-tag">&lt;link</span> <span class="hl-attr">rel</span>=<span class="hl-val">"stylesheet"</span>
+      <span class="hl-attr">href</span>=<span class="hl-val">"https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/cdn/sora-icons.css"</span><span class="hl-tag">/&gt;</span>
+<span class="hl-tag">&lt;script</span> <span class="hl-attr">src</span>=<span class="hl-val">"https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/cdn/sora-icons-shim.js"</span><span class="hl-tag">&gt;&lt;/script&gt;</span></pre></div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot html"></span> Step 2 — Use in HTML</div>
+        <button class="copy-btn" data-copy='<i class="si si-outline si-alarm"></i>
+<i class="si si-bold si-heart si-xl"></i>
+<i class="si si-duotone si-calendar si-2xl" style="color:#e2ff5d"></i>'>Copy</button>
+      </div>
+      <div class="code-block"><pre><span class="hl-cmt">&lt;!-- Format: si  +  si-{style}  +  si-{icon-name} --&gt;</span>
+
+<span class="hl-tag">&lt;i</span> <span class="hl-attr">class</span>=<span class="hl-val">"si si-outline si-alarm"</span><span class="hl-tag">&gt;&lt;/i&gt;</span>
+<span class="hl-tag">&lt;i</span> <span class="hl-attr">class</span>=<span class="hl-val">"si si-bold si-heart si-xl"</span><span class="hl-tag">&gt;&lt;/i&gt;</span>
+<span class="hl-tag">&lt;i</span> <span class="hl-attr">class</span>=<span class="hl-val">"si si-duotone si-calendar si-2xl"</span> <span class="hl-attr">style</span>=<span class="hl-val">"color:#e2ff5d"</span><span class="hl-tag">&gt;&lt;/i&gt;</span>
+<span class="hl-tag">&lt;i</span> <span class="hl-attr">class</span>=<span class="hl-val">"si si-linear si-bell si-spin"</span><span class="hl-tag">&gt;&lt;/i&gt;</span>  <span class="hl-cmt">&lt;!-- spinning --&gt;</span></pre></div>
+    </div>
+
+    <!-- Classes reference -->
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot css"></span> CSS Class Reference</div>
+      </div>
+      <div class="code-block" style="padding:0;">
+        <table class="attr-table">
+          <thead>
+            <tr><th>Class</th><th>Values</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>si</td><td>—</td><td>Required base class on every icon</td></tr>
+            <tr><td>si-{style}</td><td>bold · broken · duotone · linear · outline</td><td>Icon style variant</td></tr>
+            <tr><td>si-{name}</td><td>alarm · heart · bell …</td><td>Icon name</td></tr>
+            <tr><td>si-xs / sm / md / lg / xl / 2xl / 3xl</td><td>0.75rem → 3rem</td><td>Size helper</td></tr>
+            <tr><td>si-spin</td><td>—</td><td>Continuous rotation animation</td></tr>
+            <tr><td>si-pulse</td><td>—</td><td>Step-based spin (loading feel)</td></tr>
+            <tr><td>si-muted / primary / success / warning / danger</td><td>—</td><td>Preset color helpers</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tip">
+      <span class="tip-icon">✦</span>
+      <span>Control color with the CSS <code style="font-family:var(--mono);font-size:11px;">color</code> property — either inline or via a CSS class. The icon inherits <code style="font-family:var(--mono);font-size:11px;">currentColor</code> automatically.</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Method 2: Web Component -->
+  <section class="section">
+    <div class="section-label">
+      <div class="section-num">02</div>
+      <h2>Web Component — &lt;sora-icon&gt;</h2>
+    </div>
+    <p>The power method. Add one script tag and use <code style="font-family:var(--mono);font-size:12px;color:var(--green);">&lt;sora-icon&gt;</code> anywhere. Injects real inline SVG — perfect for duotone, animations, and dynamic control.</p>
+
+    <!-- Step 1 -->
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot js"></span> Step 1 — Add to your &lt;head&gt;</div>
+        <button class="copy-btn" data-copy='<script src="https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/cdn/sora-icon.js"></script>'>Copy</button>
+      </div>
+      <div class="code-block"><pre><span class="hl-tag">&lt;script</span> <span class="hl-attr">src</span>=<span class="hl-val">"https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/cdn/sora-icon.js"</span><span class="hl-tag">&gt;&lt;/script&gt;</span></pre></div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot wc"></span> Step 2 — Use in HTML</div>
+        <button class="copy-btn" data-copy='<sora-icon name="alarm" style="outline"></sora-icon>
+<sora-icon name="heart" style="bold" size="32" color="#e2ff5d"></sora-icon>
+<sora-icon name="calendar" style="duotone" size="48"></sora-icon>'>Copy</button>
+      </div>
+      <div class="code-block"><pre><span class="hl-cmt">&lt;!-- Basic --&gt;</span>
+<span class="hl-tag">&lt;sora-icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"alarm"</span> <span class="hl-attr">style</span>=<span class="hl-val">"outline"</span><span class="hl-tag">&gt;&lt;/sora-icon&gt;</span>
+
+<span class="hl-cmt">&lt;!-- With size + color --&gt;</span>
+<span class="hl-tag">&lt;sora-icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"heart"</span> <span class="hl-attr">style</span>=<span class="hl-val">"bold"</span> <span class="hl-attr">size</span>=<span class="hl-val">"32"</span> <span class="hl-attr">color</span>=<span class="hl-val">"#e2ff5d"</span><span class="hl-tag">&gt;&lt;/sora-icon&gt;</span>
+
+<span class="hl-cmt">&lt;!-- Custom stroke width --&gt;</span>
+<span class="hl-tag">&lt;sora-icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"bell"</span> <span class="hl-attr">style</span>=<span class="hl-val">"linear"</span> <span class="hl-attr">size</span>=<span class="hl-val">"24"</span> <span class="hl-attr">stroke-width</span>=<span class="hl-val">"1"</span><span class="hl-tag">&gt;&lt;/sora-icon&gt;</span>
+
+<span class="hl-cmt">&lt;!-- Dynamic via JS --&gt;</span>
+<span class="hl-tag">&lt;sora-icon</span> <span class="hl-attr">id</span>=<span class="hl-val">"my-icon"</span> <span class="hl-attr">name</span>=<span class="hl-val">"moon"</span> <span class="hl-attr">style</span>=<span class="hl-val">"outline"</span><span class="hl-tag">&gt;&lt;/sora-icon&gt;</span>
+<span class="hl-tag">&lt;script&gt;</span>
+  document.getElementById(<span class="hl-str">'my-icon'</span>).setAttribute(<span class="hl-str">'name'</span>, <span class="hl-str">'sun'</span>);
+<span class="hl-tag">&lt;/script&gt;</span></pre></div>
+    </div>
+
+    <!-- Attributes table -->
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot wc"></span> Attributes</div>
+      </div>
+      <div class="code-block" style="padding:0;">
+        <table class="attr-table">
+          <thead>
+            <tr><th>Attribute</th><th>Default</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>name</td><td>—</td><td>Icon name (e.g. <code style="font-family:var(--mono);font-size:11px;color:var(--accent);">alarm</code>). Required.</td></tr>
+            <tr><td>style</td><td>outline</td><td>Style variant: bold · broken · duotone · linear · outline</td></tr>
+            <tr><td>size</td><td>1em</td><td>Width &amp; height — any CSS unit or plain number (px)</td></tr>
+            <tr><td>color</td><td>currentColor</td><td>Overrides stroke/fill. Inherits from CSS by default.</td></tr>
+            <tr><td>stroke-width</td><td>SVG default</td><td>Override the icon's stroke width</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tip">
+      <span class="tip-icon">✦</span>
+      <span>The web component caches every fetched SVG in memory — repeat uses of the same icon cost <strong>zero</strong> extra network requests. Attributes are fully reactive; update them via JS and the icon re-renders instantly.</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Version pinning -->
+  <section class="section">
+    <div class="section-label">
+      <div class="section-num">03</div>
+      <h2>Version Pinning</h2>
+    </div>
+    <p>Using <code style="font-family:var(--mono);font-size:12px;color:var(--accent);">@latest</code> always pulls the newest release. For production, pin to a specific Git tag to avoid unexpected changes.</p>
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot css"></span> Pinned URL format</div>
+      </div>
+      <div class="code-block"><pre><span class="hl-cmt">&lt;!-- Latest (development) --&gt;</span>
+https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones<span class="hl-str">@latest</span>/cdn/sora-icons.css
+
+<span class="hl-cmt">&lt;!-- Pinned to v1.0.0 (production recommended) --&gt;</span>
+https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones<span class="hl-str">@1.0.0</span>/cdn/sora-icons.css
+
+<span class="hl-cmt">&lt;!-- Pinned to a specific commit hash --&gt;</span>
+https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones<span class="hl-str">@a3f92c1</span>/cdn/sora-icons.css</pre></div>
+    </div>
+  </section>
+
+</div>
+
+<div id="toast"></div>
+
+<script>
+  /* Copy buttons */
+  document.querySelectorAll('.copy-btn[data-copy]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(btn.dataset.copy).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        showToast('Copied to clipboard');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+  });
+
+  let tt;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(tt);
+    tt = setTimeout(() => t.classList.remove('show'), 2000);
+  }
+</script>
+</body>
+</html>

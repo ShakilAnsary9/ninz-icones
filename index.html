@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sora Icônes</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-icon">✦</span>
+          <span class="brand-name">Sora Icônes</span>
+        </div>
+
+        <nav class="style-tabs">
+          <button class="tab active" data-style="bold">
+            <span class="tab-dot"></span> Bold
+          </button>
+          <button class="tab" data-style="bold-duotone">
+            <span class="tab-dot"></span> Bold Duotone
+          </button>
+          <button class="tab" data-style="broken">
+            <span class="tab-dot"></span> Broken
+          </button>
+          <button class="tab" data-style="duotone">
+            <span class="tab-dot"></span> Duotone
+          </button>
+          <button class="tab" data-style="linear">
+            <span class="tab-dot"></span> Linear
+          </button>
+          <button class="tab" data-style="outline">
+            <span class="tab-dot"></span> Outline
+          </button>
+          <a href="./cdn/docs.html">Docs</a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="icon-count" id="icon-count">— icons</div>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="main">
+        <!-- Top bar -->
+        <header class="topbar">
+          <div class="search-wrap">
+            <svg
+              class="search-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+            <input
+              id="search"
+              type="text"
+              placeholder="Search icons…"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <kbd class="search-kbd" id="search-clear" style="display: none"
+              >✕</kbd
+            >
+          </div>
+
+          <div class="topbar-right">
+            <span class="badge" id="showing-count"></span>
+          </div>
+        </header>
+
+        <!-- Grid -->
+        <div class="grid-wrap">
+          <div class="grid" id="grid"></div>
+          <div class="empty" id="empty" style="display: none">
+            <div class="empty-icon">◌</div>
+            <div class="empty-text">No icons found</div>
+            <div class="empty-sub">Try a different keyword</div>
+          </div>
+        </div>
+
+        <!-- Load more -->
+        <div class="footer">
+          <button id="load-more" style="display: none">Load more</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
