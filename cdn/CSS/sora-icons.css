@@ -13,8 +13,8 @@
 [class^="si-"],
 [class*=" si-"] {
   display: inline-block;
-  width: 2em;
-  height: 2em;
+  width: 3em;
+  height: 3em;
   background-color: currentColor;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
