@@ -1,9 +1,13 @@
 /*!
  * Sora Icônes — CSS CDN
  * Usage:  <i class="si si-bold si-alarm"></i>
- * Repo:   https://github.com/your-username/sora-icones
- * CDN:    https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/cdn/sora-icons.css
+ * CDN:    https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/CSS/sora-icons.css
  */
+
+/* ── Base CDN URL ────────────────────────────────────────── */
+:root {
+  --si-cdn: "https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons";
+}
 
 /* ── Base ────────────────────────────────────────────────── */
 [class^="si-"],
@@ -20,29 +24,26 @@
   mask-size: contain;
   vertical-align: -0.125em;
   line-height: 1;
-
-  /* Default style is "outline" if no style class given */
-  --si-style: outline;
 }
 
-/* ── Style variants ──────────────────────────────────────── */
+/* ── Style variants (each with its own path) ──────────────── */
 .si-bold {
-  --si-style: bold;
+  --si-path: var(--si-cdn) + "/bold/";
 }
 .si-bold-duotone {
-  --si-style: bold-duotone;
+  --si-path: var(--si-cdn) + "/bold-duotone/";
 }
 .si-broken {
-  --si-style: broken;
+  --si-path: var(--si-cdn) + "/broken/";
 }
 .si-duotone {
-  --si-style: duotone;
+  --si-path: var(--si-cdn) + "/duotone/";
 }
 .si-linear {
-  --si-style: linear;
+  --si-path: var(--si-cdn) + "/linear/";
 }
 .si-outline {
-  --si-style: outline;
+  --si-path: var(--si-cdn) + "/outline/";
 }
 
 /* ── Size helpers ────────────────────────────────────────── */
@@ -54,113 +55,22 @@
 }
 .si-md {
   font-size: 1rem;
-} /* default */
-.si-lg {
-  font-size: 1.25rem;
 }
-.si-xl {
+.si-lg {
   font-size: 1.5rem;
 }
-.si-2xl {
+.si-xl {
   font-size: 2rem;
 }
-.si-3xl {
+.si-2xl {
   font-size: 3rem;
 }
 
-/* ── Spin / Pulse animations ─────────────────────────────── */
-.si-spin {
-  animation: si-spin 1s linear infinite;
-}
-.si-pulse {
-  animation: si-spin 1s steps(8) infinite;
-}
-
-@keyframes si-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ── Color helpers ───────────────────────────────────────── */
-.si-muted {
-  color: #9ca3af;
-}
-.si-primary {
-  color: #3b82f6;
-}
-.si-success {
-  color: #22c55e;
-}
-.si-warning {
-  color: #f59e0b;
-}
-.si-danger {
-  color: #ef4444;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   ICON DEFINITIONS
-   Each icon sets --si-icon-name and we build the URL from
-   --si-style. Replace your-username with your GitHub username.
-═══════════════════════════════════════════════════════════ */
-
-/*
-  Pattern:
-  .si-{icon-name} {
-    -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons/{style}/{name}.svg");
-            mask-image: url("...");
-  }
-
-  BUT — since we need the style to be dynamic via --si-style,
-  we use a small JS shim (sora-icons-css-shim.js) that reads
-  the computed --si-style variable and sets mask-image at
-  runtime. This keeps the CSS file clean and avoids thousands
-  of duplicate rules.
-
-  ► If you prefer ZERO JS: expand the block below and write
-    one rule per style per icon (see commented example).
-*/
-
-/* ── Zero-JS alternative (uncomment & repeat per icon) ──── */
-
+/* ── Icons (must use full hardcoded URLs - Test CSS can't concat) ─ */
 /* Bold */
 .si-bold.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/4k-bold.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/4k-bold.svg");
-}
-
-/* Bold Duotone */
-.si-bold-duotone.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/4k-bold-duotone.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/4k-bold-duotone.svg");
-}
-
-/* Broken */
-.si-broken.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/4k-broken.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/4k-broken.svg");
-}
-
-/* Duotone */
-.si-duotone.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/4k-line-duotone.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/4k-line-duotone.svg");
-}
-
-/* Linear */
-.si-linear.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/4k-linear.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/4k-linear.svg");
-}
-
-/* Outline */
-.si-outline.si-4k {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/4k-outline.svg");
-  mask-image: url("https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/4k-outline.svg");
+  -webkit-mask-image: url("../../icons/bold/4k-bold.svg");
+  mask-image: url("../../icons/bold/4k-bold.svg");
 }
 
 /* ── Icon name → custom property (used by the JS shim) ──── */
