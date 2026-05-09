@@ -7,7 +7,7 @@
 (function () {
   'use strict';
 
-  const CDN_BASE    = 'https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/icons';
+  const CDN_BASE    = 'https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons';
   const VALID_STYLES = ['bold', 'broken', 'duotone', 'linear', 'outline'];
   const cache        = new Map(); // SVG text cache
 

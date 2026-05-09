@@ -1,0 +1,265 @@
+/*!
+ * Sora Icônes — CSS CDN
+ * Usage:  <i class="si si-bold si-alarm"></i>
+ * Repo:   https://github.com/your-username/sora-icones
+ * CDN:    https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/cdn/sora-icons.css
+ */
+
+/* ── Base ────────────────────────────────────────────────── */
+[class^="si-"],
+[class*=" si-"] {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  vertical-align: -0.125em;
+  line-height: 1;
+
+  /* Default style is "outline" if no style class given */
+  --si-style: outline;
+}
+
+/* ── Style variants ──────────────────────────────────────── */
+.si-bold {
+  --si-style: bold;
+}
+.si-bold-duotone {
+  --si-style: bold-duotone;
+}
+.si-broken {
+  --si-style: broken;
+}
+.si-duotone {
+  --si-style: duotone;
+}
+.si-linear {
+  --si-style: linear;
+}
+.si-outline {
+  --si-style: outline;
+}
+
+/* ── Size helpers ────────────────────────────────────────── */
+.si-xs {
+  font-size: 0.75rem;
+}
+.si-sm {
+  font-size: 0.875rem;
+}
+.si-md {
+  font-size: 1rem;
+} /* default */
+.si-lg {
+  font-size: 1.25rem;
+}
+.si-xl {
+  font-size: 1.5rem;
+}
+.si-2xl {
+  font-size: 2rem;
+}
+.si-3xl {
+  font-size: 3rem;
+}
+
+/* ── Spin / Pulse animations ─────────────────────────────── */
+.si-spin {
+  animation: si-spin 1s linear infinite;
+}
+.si-pulse {
+  animation: si-spin 1s steps(8) infinite;
+}
+
+@keyframes si-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Color helpers ───────────────────────────────────────── */
+.si-muted {
+  color: #9ca3af;
+}
+.si-primary {
+  color: #3b82f6;
+}
+.si-success {
+  color: #22c55e;
+}
+.si-warning {
+  color: #f59e0b;
+}
+.si-danger {
+  color: #ef4444;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ICON DEFINITIONS
+   Each icon sets --si-icon-name and we build the URL from
+   --si-style. Replace your-username with your GitHub username.
+═══════════════════════════════════════════════════════════ */
+
+/*
+  Pattern:
+  .si-{icon-name} {
+    -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons/{style}/{name}.svg");
+            mask-image: url("...");
+  }
+
+  BUT — since we need the style to be dynamic via --si-style,
+  we use a small JS shim (sora-icons-css-shim.js) that reads
+  the computed --si-style variable and sets mask-image at
+  runtime. This keeps the CSS file clean and avoids thousands
+  of duplicate rules.
+
+  ► If you prefer ZERO JS: expand the block below and write
+    one rule per style per icon (see commented example).
+*/
+
+/* ── Zero-JS alternative (uncomment & repeat per icon) ──── */
+/*
+.si-bold.si-alarm {
+  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons/bold/alarm.svg");
+          mask-image: url("https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons/bold/alarm.svg");
+}
+.si-outline.si-alarm {
+  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons/outline/alarm.svg");
+          mask-image: url("https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons/outline/alarm.svg");
+}
+*/
+
+/* ── Icon name → custom property (used by the JS shim) ──── */
+/* Add one line per icon name */
+.si-4k {
+  --si-name: 4k;
+}
+.si-accessibility {
+  --si-name: accessibility;
+}
+.si-accumulator {
+  --si-name: accumulator;
+}
+.si-add-circle {
+  --si-name: add-circle;
+}
+.si-add-folder {
+  --si-name: add-folder;
+}
+.si-add-square {
+  --si-name: add-square;
+}
+.si-alarm {
+  --si-name: alarm;
+}
+.si-airbuds {
+  --si-name: airbuds;
+}
+.si-airbuds-case {
+  --si-name: airbuds-case;
+}
+.si-balloon {
+  --si-name: balloon;
+}
+.si-basketball {
+  --si-name: basketball;
+}
+.si-bath {
+  --si-name: bath;
+}
+.si-battery-charge {
+  --si-name: battery-charge;
+}
+.si-battery-full {
+  --si-name: battery-full;
+}
+.si-battery-half {
+  --si-name: battery-half;
+}
+.si-battery-low {
+  --si-name: battery-low;
+}
+.si-bed {
+  --si-name: bed;
+}
+.si-bell {
+  --si-name: bell;
+}
+.si-bell-off {
+  --si-name: bell-off;
+}
+.si-bluetooth {
+  --si-name: bluetooth;
+}
+.si-bolt-circle {
+  --si-name: bolt-circle;
+}
+.si-bookmark {
+  --si-name: bookmark;
+}
+.si-calendar {
+  --si-name: calendar;
+}
+.si-camera {
+  --si-name: camera;
+}
+.si-cloud {
+  --si-name: cloud;
+}
+.si-file {
+  --si-name: file;
+}
+.si-folder {
+  --si-name: folder;
+}
+.si-heart {
+  --si-name: heart;
+}
+.si-home {
+  --si-name: home;
+}
+.si-image {
+  --si-name: image;
+}
+.si-map-pin {
+  --si-name: map-pin;
+}
+.si-menu {
+  --si-name: menu;
+}
+.si-moon {
+  --si-name: moon;
+}
+.si-phone {
+  --si-name: phone;
+}
+.si-search {
+  --si-name: search;
+}
+.si-settings {
+  --si-name: settings;
+}
+.si-star {
+  --si-name: star;
+}
+.si-sun {
+  --si-name: sun;
+}
+.si-tag {
+  --si-name: tag;
+}
+.si-user {
+  --si-name: user;
+}
+.si-wifi {
+  --si-name: wifi;
+}
+/* ↑ Keep adding icons here as your library grows */

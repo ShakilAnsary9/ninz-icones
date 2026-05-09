@@ -1,265 +1,165 @@
 /*!
- * Sora Icônes — CSS CDN
- * Usage:  <i class="si si-bold si-alarm"></i>
- * Repo:   https://github.com/YOUR_USERNAME/sora-icones
- * CDN:    https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/cdn/sora-icons.css
+ * Sora Icônes - Icon CSS
+ * CDN: https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/sora-icons.css
+ * Usage: <i class="si si-{style} si-{icon-name}"></i>
+ * Example: <i class="si si-bold si-alarm"></i>
  */
 
-/* ── Base ────────────────────────────────────────────────── */
-[class^="si-"],
-[class*=" si-"] {
+/* Base */
+.si {
   display: inline-block;
   width: 1em;
   height: 1em;
-  background-color: currentColor;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  vertical-align: -0.125em;
-  line-height: 1;
-
-  /* Default style is "outline" if no style class given */
-  --si-style: outline;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
 }
 
-/* ── Style variants ──────────────────────────────────────── */
-.si-bold {
-  --si-style: bold;
-}
-.si-bold-duotone {
-  --si-style: bold-duotone;
-}
-.si-broken {
-  --si-style: broken;
-}
-.si-duotone {
-  --si-style: duotone;
-}
-.si-linear {
-  --si-style: linear;
-}
-.si-outline {
-  --si-style: outline;
-}
+/* ─── Style Variants ─── */
+.si-bold { --icon-url: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/'); }
+.si-bold-duotone { --icon-url: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/'); }
+.si-broken { --icon-url: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/'); }
+.si-duotone { --icon-url: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/'); }
+.si-linear { --icon-url: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/'); }
+.si-outline { --icon-url: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/'); }
 
-/* ── Size helpers ────────────────────────────────────────── */
-.si-xs {
-  font-size: 0.75rem;
-}
-.si-sm {
-  font-size: 0.875rem;
-}
-.si-md {
-  font-size: 1rem;
-} /* default */
-.si-lg {
-  font-size: 1.25rem;
-}
-.si-xl {
-  font-size: 1.5rem;
-}
-.si-2xl {
-  font-size: 2rem;
-}
-.si-3xl {
-  font-size: 3rem;
-}
+/* Icon sizes */
+.si-xs { width: 12px; height: 12px; }
+.si-sm { width: 16px; height: 16px; }
+.si-md { width: 24px; height: 24px; }
+.si-lg { width: 32px; height: 32px; }
+.si-xl { width: 48px; height: 48px; }
+.si-2xl { width: 64px; height: 64px; }
 
-/* ── Spin / Pulse animations ─────────────────────────────── */
-.si-spin {
-  animation: si-spin 1s linear infinite;
-}
-.si-pulse {
-  animation: si-spin 1s steps(8) infinite;
-}
+/* The actual icons - each needs its own background image */
+.si-bold.si-4k { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/4k.svg'); }
+.si-bold.si-accessibility { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/accessibility.svg'); }
+.si-bold.si-accumulator { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/accumulator.svg'); }
+.si-bold.si-add-circle { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/add-circle.svg'); }
+.si-bold.si-add-folder { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/add-folder.svg'); }
+.si-bold.si-add-square { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/add-square.svg'); }
+.si-bold.si-adhesive-plaster { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/adhesive-plaster.svg'); }
+.si-bold.si-airbuds { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/airbuds.svg'); }
+.si-bold.si-airbuds-case { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/airbuds-case.svg'); }
+.si-bold.si-alarm { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/alarm.svg'); }
+.si-bold.si-bag-heart { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bag-heart.svg'); }
+.si-bold.si-bag-music { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bag-music.svg'); }
+.si-bold.si-bag-smile { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bag-smile.svg'); }
+.si-bold.si-balloon { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/balloon.svg'); }
+.si-bold.si-balls { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/balls.svg'); }
+.si-bold.si-banknote { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/banknote.svg'); }
+.si-bold.si-bar-chair { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bar-chair.svg'); }
+.si-bold.si-basketball { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/basketball.svg'); }
+.si-bold.si-bath { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bath.svg'); }
+.si-bold.si-battery-charge { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/battery-charge.svg'); }
+.si-bold.si-battery-full { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/battery-full.svg'); }
+.si-bold.si-battery-half { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/battery-half.svg'); }
+.si-bold.si-battery-low { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/battery-low.svg'); }
+.si-bold.si-bed { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bed.svg'); }
+.si-bold.si-bedside-table { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bedside-table.svg'); }
+.si-bold.si-bell { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bell.svg'); }
+.si-bold.si-bill { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bill.svg'); }
+.si-bold.si-bill-check { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bill-check.svg'); }
+.si-bold.si-bill-cross { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bill-cross.svg'); }
+.si-bold.si-bill-list { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bill-list.svg'); }
+.si-bold.si-black-hole { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/black-hole.svg'); }
+.si-bold.si-bluetooth { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bluetooth.svg'); }
+.si-bold.si-body { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/body.svg'); }
+.si-bold.si-body-shape { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/body-shape.svg'); }
+.si-bold.si-bolt-circle { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bolt-circle.svg'); }
+.si-bold.si-bolt-new { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bolt-new.svg'); }
+.si-bold.si-bomb { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bomb.svg'); }
+.si-bold.si-bone { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bone.svg'); }
+.si-bold.si-bookmark { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/bookmark.svg'); }
+.si-bold.si-camera { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/camera.svg'); }
+.si-bold.si-calendar { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/calendar.svg'); }
+.si-bold.si-cloud { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/cloud.svg'); }
+.si-bold.si-credit-card { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/credit-card.svg'); }
+.si-bold.si-file { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/file.svg'); }
+.si-bold.si-folder { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/folder.svg'); }
+.si-bold.si-heart { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/heart.svg'); }
+.si-bold.si-home { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/home.svg'); }
+.si-bold.si-image { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/image.svg'); }
+.si-bold.si-map-pin { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/map-pin.svg'); }
+.si-bold.si-menu { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/menu.svg'); }
+.si-bold.si-moon { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/moon.svg'); }
+.si-bold.si-phone { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/phone.svg'); }
+.si-bold.si-search { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/search.svg'); }
+.si-bold.si-settings { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/settings.svg'); }
+.si-bold.si-star { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/star.svg'); }
+.si-bold.si-sun { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/sun.svg'); }
+.si-bold.si-tag { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/tag.svg'); }
+.si-bold.si-user { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/user.svg'); }
+.si-bold.si-wifi { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/wifi.svg'); }
+.si-bold.si-x { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold/x.svg'); }
 
-@keyframes si-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* Linear */
+.si-linear.si-4k { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/4k.svg'); }
+.si-linear.si-alarm { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/alarm.svg'); }
+.si-linear.si-bell { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/bell.svg'); }
+.si-linear.si-camera { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/camera.svg'); }
+.si-linear.si-folder { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/folder.svg'); }
+.si-linear.si-heart { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/heart.svg'); }
+.si-linear.si-home { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/home.svg'); }
+.si-linear.si-search { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/search.svg'); }
+.si-linear.si-settings { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/settings.svg'); }
+.si-linear.si-star { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/star.svg'); }
+.si-linear.si-user { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/user.svg'); }
+.si-linear.si-x { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/linear/x.svg'); }
 
-/* ── Color helpers ───────────────────────────────────────── */
-.si-muted {
-  color: #9ca3af;
-}
-.si-primary {
-  color: #3b82f6;
-}
-.si-success {
-  color: #22c55e;
-}
-.si-warning {
-  color: #f59e0b;
-}
-.si-danger {
-  color: #ef4444;
-}
+/* Outline */
+.si-outline.si-4k { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/4k.svg'); }
+.si-outline.si-alarm { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/alarm.svg'); }
+.si-outline.si-bell { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/bell.svg'); }
+.si-outline.si-camera { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/camera.svg'); }
+.si-outline.si-folder { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/folder.svg'); }
+.si-outline.si-heart { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/heart.svg'); }
+.si-outline.si-home { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/home.svg'); }
+.si-outline.si-search { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/search.svg'); }
+.si-outline.si-settings { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/settings.svg'); }
+.si-outline.si-star { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/star.svg'); }
+.si-outline.si-user { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/user.svg'); }
+.si-outline.si-x { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/outline/x.svg'); }
 
-/* ═══════════════════════════════════════════════════════════
-   ICON DEFINITIONS
-   Each icon sets --si-icon-name and we build the URL from
-   --si-style. Replace YOUR_USERNAME with your GitHub username.
-═══════════════════════════════════════════════════════════ */
+/* Duotone */
+.si-duotone.si-4k { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/4k.svg'); }
+.si-duotone.si-alarm { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/alarm.svg'); }
+.si-duotone.si-bell { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/bell.svg'); }
+.si-duotone.si-camera { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/camera.svg'); }
+.si-duotone.si-folder { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/folder.svg'); }
+.si-duotone.si-heart { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/heart.svg'); }
+.si-duotone.si-home { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/home.svg'); }
+.si-duotone.si-search { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/search.svg'); }
+.si-duotone.si-settings { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/settings.svg'); }
+.si-duotone.si-star { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/star.svg'); }
+.si-duotone.si-user { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/user.svg'); }
+.si-duotone.si-x { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/duotone/x.svg'); }
 
-/*
-  Pattern:
-  .si-{icon-name} {
-    -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/icons/{style}/{name}.svg");
-            mask-image: url("...");
-  }
+/* Broken */
+.si-broken.si-4k { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/4k.svg'); }
+.si-broken.si-alarm { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/alarm.svg'); }
+.si-broken.si-bell { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/bell.svg'); }
+.si-broken.si-camera { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/camera.svg'); }
+.si-broken.si-folder { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/folder.svg'); }
+.si-broken.si-heart { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/heart.svg'); }
+.si-broken.si-home { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/home.svg'); }
+.si-broken.si-search { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/search.svg'); }
+.si-broken.si-settings { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/settings.svg'); }
+.si-broken.si-star { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/star.svg'); }
+.si-broken.si-user { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/user.svg'); }
+.si-broken.si-x { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/broken/x.svg'); }
 
-  BUT — since we need the style to be dynamic via --si-style,
-  we use a small JS shim (sora-icons-css-shim.js) that reads
-  the computed --si-style variable and sets mask-image at
-  runtime. This keeps the CSS file clean and avoids thousands
-  of duplicate rules.
-
-  ► If you prefer ZERO JS: expand the block below and write
-    one rule per style per icon (see commented example).
-*/
-
-/* ── Zero-JS alternative (uncomment & repeat per icon) ──── */
-/*
-.si-bold.si-alarm {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/icons/bold/alarm.svg");
-          mask-image: url("https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/icons/bold/alarm.svg");
-}
-.si-outline.si-alarm {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/icons/outline/alarm.svg");
-          mask-image: url("https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/icons/outline/alarm.svg");
-}
-*/
-
-/* ── Icon name → custom property (used by the JS shim) ──── */
-/* Add one line per icon name */
-.si-4k {
-  --si-name: 4k;
-}
-.si-accessibility {
-  --si-name: accessibility;
-}
-.si-accumulator {
-  --si-name: accumulator;
-}
-.si-add-circle {
-  --si-name: add-circle;
-}
-.si-add-folder {
-  --si-name: add-folder;
-}
-.si-add-square {
-  --si-name: add-square;
-}
-.si-alarm {
-  --si-name: alarm;
-}
-.si-airbuds {
-  --si-name: airbuds;
-}
-.si-airbuds-case {
-  --si-name: airbuds-case;
-}
-.si-balloon {
-  --si-name: balloon;
-}
-.si-basketball {
-  --si-name: basketball;
-}
-.si-bath {
-  --si-name: bath;
-}
-.si-battery-charge {
-  --si-name: battery-charge;
-}
-.si-battery-full {
-  --si-name: battery-full;
-}
-.si-battery-half {
-  --si-name: battery-half;
-}
-.si-battery-low {
-  --si-name: battery-low;
-}
-.si-bed {
-  --si-name: bed;
-}
-.si-bell {
-  --si-name: bell;
-}
-.si-bell-off {
-  --si-name: bell-off;
-}
-.si-bluetooth {
-  --si-name: bluetooth;
-}
-.si-bolt-circle {
-  --si-name: bolt-circle;
-}
-.si-bookmark {
-  --si-name: bookmark;
-}
-.si-calendar {
-  --si-name: calendar;
-}
-.si-camera {
-  --si-name: camera;
-}
-.si-cloud {
-  --si-name: cloud;
-}
-.si-file {
-  --si-name: file;
-}
-.si-folder {
-  --si-name: folder;
-}
-.si-heart {
-  --si-name: heart;
-}
-.si-home {
-  --si-name: home;
-}
-.si-image {
-  --si-name: image;
-}
-.si-map-pin {
-  --si-name: map-pin;
-}
-.si-menu {
-  --si-name: menu;
-}
-.si-moon {
-  --si-name: moon;
-}
-.si-phone {
-  --si-name: phone;
-}
-.si-search {
-  --si-name: search;
-}
-.si-settings {
-  --si-name: settings;
-}
-.si-star {
-  --si-name: star;
-}
-.si-sun {
-  --si-name: sun;
-}
-.si-tag {
-  --si-name: tag;
-}
-.si-user {
-  --si-name: user;
-}
-.si-wifi {
-  --si-name: wifi;
-}
-/* ↑ Keep adding icons here as your library grows */
+/* Bold Duotone */
+.si-bold-duotone.si-4k { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/4k.svg'); }
+.si-bold-duotone.si-alarm { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/alarm.svg'); }
+.si-bold-duotone.si-bell { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/bell.svg'); }
+.si-bold-duotone.si-camera { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/camera.svg'); }
+.si-bold-duotone.si-folder { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/folder.svg'); }
+.si-bold-duotone.si-heart { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/heart.svg'); }
+.si-bold-duotone.si-home { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/home.svg'); }
+.si-bold-duotone.si-search { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/search.svg'); }
+.si-bold-duotone.si-settings { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/settings.svg'); }
+.si-bold-duotone.si-star { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/star.svg'); }
+.si-bold-duotone.si-user { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/user.svg'); }
+.si-bold-duotone.si-x { background-image: url('https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/icons/bold-duotone/x.svg'); }

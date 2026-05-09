@@ -13,7 +13,7 @@
 (function () {
   'use strict';
 
-  const CDN_BASE = 'https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/icons';
+  const CDN_BASE = 'https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons';
   const DEFAULT_STYLE = 'outline';
 
   function applyMasks(root) {
