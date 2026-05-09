@@ -126,16 +126,11 @@
 */
 
 /* ── Zero-JS alternative (uncomment & repeat per icon) ──── */
-/*
-.si-bold.si-alarm {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons/bold/alarm.svg");
-          mask-image: url("https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons/bold/alarm.svg");
+
+.si-bold.si-4k {
+  -webkit-mask-image: url("../../icons/bold/4k-bold.svg");
+  mask-image: url("../../icons/bold/4k-bold.svg");
 }
-.si-outline.si-alarm {
-  -webkit-mask-image: url("https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons/outline/alarm.svg");
-          mask-image: url("https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons/outline/alarm.svg");
-}
-*/
 
 /* ── Icon name → custom property (used by the JS shim) ──── */
 /* Add one line per icon name */
