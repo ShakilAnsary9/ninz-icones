@@ -13,7 +13,7 @@
     "bold",
     "bold-duotone",
     "broken",
-    "duotone",
+    "line-duotone",
     "linear",
     "outline",
   ];

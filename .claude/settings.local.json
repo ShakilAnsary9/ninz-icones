@@ -5,7 +5,10 @@
       "Bash(git tag *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(curl -s \"https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@v1.0.0/cdn/sora-icon.js\")",
+      "Bash(git show *)",
+      "Bash(curl -s \"https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/sora-icon.js\")"
     ]
   }
 }
