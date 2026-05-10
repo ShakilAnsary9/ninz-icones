@@ -524,6 +524,11 @@ document.getElementById("cdn-copy-btn").addEventListener("click", () => {
   copyToClipboard(cdnLink, "CDN link copied!");
 });
 
+document.getElementById("wc-copy-btn").addEventListener("click", () => {
+  const wcLink = document.getElementById("wc-link").value;
+  copyToClipboard(wcLink, "Web Component script copied!");
+});
+
 /* ── Modal Button Clicks ─────────────────────────────────── */
 function handleModalAction(action, btn) {
   const modalContent = modalEl.querySelector(".modal-content");
