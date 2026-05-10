@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node build-css.js)"
+      "Bash(node build-css.js)",
+      "Bash(git tag *)"
     ]
   }
 }
