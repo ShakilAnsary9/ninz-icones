@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(node build-css.js)",
-      "Bash(git tag *)"
+      "Bash(git tag *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
