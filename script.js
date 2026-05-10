@@ -23,7 +23,6 @@ let page = 1;
 
 /* ── DOM refs ───────────────────────────────────────────── */
 const grid = document.getElementById("grid");
-const loadBtn = document.getElementById("load-more");
 const searchEl = document.getElementById("search");
 const clearBtn = document.getElementById("search-clear");
 const countEl = document.getElementById("showing-count");
@@ -79,6 +78,7 @@ fetch("icons.json")
     allIcons = data;
     injectIconCSS(data);
     applyFilter();
+    setTimeout(setupScrollLoader, 100);
   })
   .catch(() => {
     // Dev fallback: generate dummy data so layout is testable
@@ -153,6 +153,7 @@ fetch("icons.json")
       outline: [...names],
     };
     applyFilter();
+    setTimeout(setupScrollLoader, 100);
     console.warn("icons.json not found — using demo data");
   });
 
@@ -170,7 +171,6 @@ function renderGrid(reset = false) {
 
   if (filtered.length === 0) {
     emptyEl.style.display = "flex";
-    loadBtn.style.display = "none";
     return;
   }
   emptyEl.style.display = "none";
@@ -184,7 +184,6 @@ function renderGrid(reset = false) {
     grid.appendChild(card);
   });
 
-  loadBtn.style.display = end < filtered.length ? "block" : "none";
   updateCounts();
 }
 
@@ -357,15 +356,19 @@ function fetchSvgText(src) {
     .catch(() => "<!-- SVG not found -->");
 }
 
-function copyToClipboard(text, msg) {
+function copyToClipboard(text, msg, preserveScripts = false) {
   // Clean up any injected scripts, HTML comments, and extra whitespace/newlines
   let cleanedText = text
     .replace(/<!--[\s\S]*?-->/g, "")
-    .replace(/<script[\s\S]*?<\/script>/gi, "")
     .replace(/\n\s*\n/g, "\n") // Remove multiple newlines
     .replace(/\s+\n/g, "\n") // Remove whitespace before newlines
     .replace(/\n\s+/g, "\n") // Remove newlines with trailing whitespace
     .trim();
+
+  // Remove script tags unless preserveScripts is true
+  if (!preserveScripts) {
+    cleanedText = cleanedText.replace(/<script[\s\S]*?<\/script>/gi, "");
+  }
 
   // Always show toast first to ensure visibility
   showToast(msg);
@@ -422,7 +425,10 @@ function updateCounts() {
   const shown = Math.min(page * PAGE_SIZE, filtered.length);
   const total = (allIcons[style] || []).length;
   countEl.textContent = `${shown} / ${filtered.length} icons`;
-  totalEl.textContent = `${total} icons`;
+
+  // Calculate total icons across all styles
+  const allTotal = Object.values(allIcons).reduce((sum, arr) => sum + (arr?.length || 0), 0);
+  totalEl.textContent = `${allTotal} icons`;
 }
 
 /* ── Events ─────────────────────────────────────────────── */
@@ -469,10 +475,29 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-/* Load more */
-loadBtn.addEventListener("click", () => {
-  page++;
-  renderGrid(false);
+/* Load more on scroll using IntersectionObserver */
+function setupScrollLoader() {
+  // Create a sentinel element at bottom of grid
+  const sentinel = document.createElement("div");
+  sentinel.id = "scroll-sentinel";
+  sentinel.style.height = "1px";
+  document.querySelector(".grid-wrap").appendChild(sentinel);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && page * PAGE_SIZE < filtered.length) {
+        page++;
+        renderGrid(false);
+      }
+    });
+  }, { rootMargin: "200px" });
+
+  observer.observe(sentinel);
+}
+
+// Call after DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(setupScrollLoader, 100);
 });
 
 /* ── Theme Toggle ─────────────────────────────────────── */
@@ -517,13 +542,7 @@ function handleModalAction(action, btn) {
   }
 
   if (action === "copy-webcomponent") {
-    fetchSvgText(src).then((text) => {
-      const wcCode = `<script src="https://cdn.jsdelivr.net/npm/@ninzoc/sora-icons-shim@latest"><\/script>
-
-<!-- SVG Code -->
-${text}`;
-      copyToClipboard(wcCode, "Web component code copied!");
-    });
+    openWcModal();
   }
 
   if (action === "copy-jsx") {
@@ -647,4 +666,238 @@ function downloadPngWithSize(name, svgText, size) {
   };
 
   img.src = url;
+}
+
+/* ── Web Component Modal ──────────────────────────────── */
+const wcModalEl = document.getElementById("wc-modal");
+let wcSvgText = "";
+
+function openWcModal() {
+  if (!currentIcon) return;
+  wcModalEl.classList.add("show");
+  document.body.style.overflow = "hidden";
+
+  fetchSvgText(currentIcon.imgSrc).then((text) => {
+    wcSvgText = text;
+  });
+}
+
+function closeWcModal() {
+  wcModalEl.classList.remove("show");
+  document.body.style.overflow = "";
+  wcSvgText = "";
+}
+
+wcModalEl.addEventListener("click", (e) => {
+  if (e.target === wcModalEl || e.target.closest(".wc-modal-backdrop")) {
+    closeWcModal();
+  }
+});
+
+document.getElementById("wc-modal-close").addEventListener("click", closeWcModal);
+
+document.querySelectorAll(".wc-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const framework = btn.dataset.framework;
+    handleWcFramework(framework);
+  });
+});
+
+function handleWcFramework(framework) {
+  const name = currentIcon ? currentIcon.name : "Icon";
+  const componentName = toPascalCase(name);
+
+  switch (framework) {
+    case "vue": {
+      const vueCode = `<script setup>
+defineOptions({ name: 'Si${componentName}' })
+
+defineProps({
+  size: { type: [String, Number], default: '1em' },
+  class: { type: String, default: '' }
+})
+<\/script>
+
+<template>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    :width="size"
+    :height="size"
+    :class="class"
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+${extractSvgPath(wcSvgText)}
+  </svg>
+</template>`;
+      copyToClipboard(vueCode, "Vue component copied!", true);
+      break;
+    }
+    case "vue-ts": {
+      // Extract and clean SVG content (remove any script tags inside SVG)
+      const svgContent = wcSvgText
+        .replace(/<svg[^>]*>/i, "")
+        .replace(/<\/svg>/i, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "")
+        .trim();
+      const vueTsCode = `<template>
+  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">${svgContent}</svg>
+</template>
+
+<script lang="ts">
+export default {
+  name: 'Si${componentName}'
+}
+</script>`;
+      copyToClipboard(vueTsCode, "Vue + TS component copied!", true);
+      break;
+    }
+    case "react": {
+      const svgContent = wcSvgText
+        .replace(/<svg[^>]*>/i, "")
+        .replace(/<\/svg>/i, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "")
+        .trim();
+      const reactCode = `import React from 'react'
+
+export function Si${componentName}(props) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>${svgContent}</svg>
+  )
+}
+export default Si${componentName}`;
+      copyToClipboard(reactCode, "React component copied!");
+      break;
+    }
+    case "react-ts": {
+      const svgContent = wcSvgText
+        .replace(/<svg[^>]*>/i, "")
+        .replace(/<\/svg>/i, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "")
+        .trim();
+      const reactTsCode = `import React, { SVGProps } from 'react'
+
+export function Si${componentName}(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>${svgContent}</svg>
+  )
+}
+export default Si${componentName}`;
+      copyToClipboard(reactTsCode, "React + TS component copied!");
+      break;
+    }
+    case "svelte": {
+      const svgContent = wcSvgText
+        .replace(/<svg[^>]*>/i, "")
+        .replace(/<\/svg>/i, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "")
+        .trim();
+      const svelteCode = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...$$props}>${svgContent}</svg>`;
+      copyToClipboard(svelteCode, "Svelte code copied!");
+      break;
+    }
+    case "qwik": {
+      const svgContent = wcSvgText
+        .replace(/<svg[^>]*>/i, "")
+        .replace(/<\/svg>/i, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "")
+        .trim();
+      const qwikCode = `export function Si${componentName}(props: QwikIntrinsicElements['svg'], key: string) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props} key={key}>${svgContent}</svg>
+  )
+}`;
+      copyToClipboard(qwikCode, "Qwik code copied!");
+      break;
+    }
+    case "solid": {
+      const svgContent = wcSvgText
+        .replace(/<svg[^>]*>/i, "")
+        .replace(/<\/svg>/i, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "")
+        .trim();
+      const solidCode = `export function Si${componentName}(props: JSX.IntrinsicElements['svg']) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>${svgContent}</svg>
+  )
+}`;
+      copyToClipboard(solidCode, "Solid code copied!");
+      break;
+    }
+    case "astro": {
+      const svgContent = wcSvgText
+        .replace(/<svg[^>]*>/i, "")
+        .replace(/<\/svg>/i, "")
+        .replace(/<script[\s\S]*?<\/script>/gi, "")
+        .trim();
+      const astroCode = `---
+const props = Astro.props
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>${svgContent}</svg>`;
+      copyToClipboard(astroCode, "Astro code copied!");
+      break;
+    }
+    case "react-native": {
+      // Convert SVG to React Native Svg format
+      let rnContent = wcSvgText
+        .replace(/<script[\s\S]*?<\/script>/gi, "")
+        .trim();
+
+      // Replace svg tag
+      rnContent = rnContent.replace(/<svg[^>]*>/i, "").replace(/<\/svg>/i, "");
+
+      // Replace <path> with <Path
+      rnContent = rnContent.replace(/<path /gi, "<Path ");
+      // Replace </path> with />
+      rnContent = rnContent.replace(/<\/path>/gi, "/>");
+
+      // Replace <g> with <G
+      rnContent = rnContent.replace(/<g[^>]*>/gi, "<G>");
+      // Replace </g> with </G>
+      rnContent = rnContent.replace(/<\/g>/gi, "</G>");
+
+      // Remove attributes not valid in RN (stroke, stroke-width, clip-rule, fill-rule, etc)
+      rnContent = rnContent.replace(/\s*(stroke|stroke-width|stroke-linecap|stroke-linejoin|clip-rule|fill-rule)="[^"]*"/gi, "");
+
+      const rnCode = `import Svg, { Path, G } from 'react-native-svg';
+
+export function Si${componentName}(props) {
+  return (
+    <Svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">${rnContent}</Svg>
+  )
+}`;
+      copyToClipboard(rnCode, "React Native code copied!");
+      break;
+    }
+    case "data-url": {
+      // Clean SVG and create data URL
+      let svgClean = wcSvgText
+        .replace(/<script[\s\S]*?<\/script>/gi, "")
+        .trim();
+
+      // URL encode the SVG
+      const encoded = encodeURIComponent(svgClean);
+      const dataUrl = `data:image/svg+xml,${encoded}`;
+
+      copyToClipboard(dataUrl, "Data URL copied!");
+      break;
+    }
+  }
+  closeWcModal();
+}
+
+function extractSvgPath(svgText) {
+  if (!svgText) return "";
+
+  // Extract the inner content (everything inside the svg tag)
+  const match = svgText.match(/<svg[^>]*>([\s\S]*)<\/svg>/i);
+  if (match) {
+    // Clean any script tags from the SVG content
+    let content = match[1].trim();
+    content = content.replace(/<script[\s\S]*?<\/script>/gi, "");
+    // Indent each line
+    return content.split("\n").map(line => "    " + line).join("\n");
+  }
+  return "";
 }

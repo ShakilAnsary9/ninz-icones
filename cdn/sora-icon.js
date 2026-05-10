@@ -1,24 +1,26 @@
 /*!
  * Sora Icônes — Web Component
- * Usage:  <sora-icon name="alarm" style="bold" size="32" color="#fff"></sora-icon>
- * CDN:    https://cdn.jsdelivr.net/gh/YOUR_USERNAME/sora-icones@latest/cdn/sora-icon.js
+ * Usage:  <sora-icon name="alarm" icon-type="outline" size="32" color="#fff"></sora-icon>
+ * CDN:    https://cdn.jsdelivr.net/gh/shakilansary9/sora-icones@latest/cdn/sora-icon.js
  */
 
 (function () {
   'use strict';
 
-  const CDN_BASE    = 'https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/icons';
-  const VALID_STYLES = ['bold', 'broken', 'duotone', 'linear', 'outline'];
+  const CDN_BASE    = 'https://cdn.jsdelivr.net/gh/shakilansary9/sora-icones@latest/icons';
+  const VALID_TYPES = ['bold', 'bold-duotone', 'broken', 'duotone', 'linear', 'outline'];
   const cache        = new Map(); // SVG text cache
 
   /* ── Fetch with cache ──────────────────────────────────── */
-  function fetchSVG(style, name) {
-    const key = `${style}/${name}`;
+  function fetchSVG(iconType, name) {
+    // Build icon filename: "alarm" + "-" + "outline" = "alarm-outline"
+    const iconFile = name + '-' + iconType;
+    const key = iconFile;
     if (cache.has(key)) return Promise.resolve(cache.get(key));
-    const url = `${CDN_BASE}/${style}/${name}.svg`;
+    const url = `${CDN_BASE}/${iconType}/${iconFile}.svg`;
     return fetch(url)
       .then(r => {
-        if (!r.ok) throw new Error(`Sora Icônes: icon not found — ${key}`);
+        if (!r.ok) throw new Error(`Sora Icônes: icon not found — ${iconFile}`);
         return r.text();
       })
       .then(svg => {
@@ -31,7 +33,7 @@
   class SoraIcon extends HTMLElement {
 
     static get observedAttributes() {
-      return ['name', 'style', 'size', 'color', 'stroke-width'];
+      return ['name', 'icon-type', 'size', 'color', 'stroke-width'];
     }
 
     constructor() {
@@ -43,9 +45,9 @@
     attributeChangedCallback() { this._render(); }
 
     get _iconName()  { return this.getAttribute('name')         || ''; }
-    get _iconStyle() {
-      const s = this.getAttribute('style') || this.getAttribute('variant') || 'outline';
-      return VALID_STYLES.includes(s) ? s : 'outline';
+    get _iconType() {
+      const t = this.getAttribute('icon-type') || 'outline';
+      return VALID_TYPES.includes(t) ? t : 'outline';
     }
     get _size()      { return this.getAttribute('size')         || '1em'; }
     get _color()     { return this.getAttribute('color')        || 'currentColor'; }
@@ -53,7 +55,7 @@
 
     _render() {
       const name  = this._iconName;
-      const style = this._iconStyle;
+      const iconType = this._iconType;
       const size  = this._size;
       const color = this._color;
 
@@ -69,7 +71,7 @@
         size
       );
 
-      fetchSVG(style, name)
+      fetchSVG(iconType, name)
         .then(svg => {
           /* Patch SVG attributes for color + size control */
           let patched = svg
