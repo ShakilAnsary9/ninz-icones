@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sora Icônes — CDN Docs</title>
+  <title>Ninz Icônes — Documentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"/>
   <style>
@@ -23,6 +23,8 @@
       --green:    #5dffa0;
       --blue:     #5db8ff;
       --pink:     #ff5db8;
+      --purple:   #c084fc;
+      --orange:   #ff9f5d;
       --font:     'Syne', sans-serif;
       --mono:     'JetBrains Mono', monospace;
       --r:        12px;
@@ -38,7 +40,7 @@
     }
 
     /* ── Layout ─────────────────────────────────────────── */
-    .page { max-width: 860px; margin: 0 auto; padding: 0 24px 100px; }
+    .page { max-width: 900px; margin: 0 auto; padding: 0 24px 100px; }
 
     /* ── Hero ───────────────────────────────────────────── */
     .hero {
@@ -137,6 +139,92 @@
       margin-bottom: 16px;
     }
 
+    /* ── Style Cards ─────────────────────────────────────── */
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .style-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .style-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+    }
+
+    .style-card.bold::before { background: var(--accent); }
+    .style-card.outline::before { background: var(--text-2); }
+    .style-card.linear::before { background: var(--blue); }
+    .style-card.duotone::before { background: var(--pink); }
+    .style-card.broken::before { background: var(--orange); }
+    .style-card.bold-duotone::before { background: var(--purple); }
+
+    .style-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .style-name {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .style-card.bold .style-name { color: var(--accent); }
+    .style-card.outline .style-name { color: var(--text-1); }
+    .style-card.linear .style-name { color: var(--blue); }
+    .style-card.duotone .style-name { color: var(--pink); }
+    .style-card.broken .style-name { color: var(--orange); }
+    .style-card.bold-duotone .style-name { color: var(--purple); }
+
+    .style-count {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-3);
+      background: var(--bg-3);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+
+    .style-desc {
+      font-size: 13px;
+      color: var(--text-2);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .style-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .style-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: var(--bg-3);
+      color: var(--text-3);
+      border: 1px solid var(--border);
+    }
+
     /* ── Method card ────────────────────────────────────── */
     .method-card {
       background: var(--bg-2);
@@ -169,10 +257,12 @@
       width: 8px; height: 8px;
       border-radius: 50%;
     }
+    .method-dot.npm   { background: #CB3837; }
+    .method-dot.yarn { background: #2C8EBB; }
+    .method-dot.pnpm { background: #F692AE; }
     .method-dot.css  { background: var(--blue); }
     .method-dot.js   { background: var(--accent); }
     .method-dot.wc   { background: var(--green); }
-    .method-dot.html { background: var(--pink); }
 
     .copy-btn {
       padding: 4px 12px;
@@ -206,7 +296,47 @@
     .hl-val    { color: var(--green); }
     .hl-cmt    { color: var(--text-3); font-style: italic; }
     .hl-str    { color: var(--accent); }
-    .hl-url    { color: var(--blue); text-decoration: underline; opacity: .8; }
+    .hl-key    { color: var(--purple); }
+
+    /* ── Variant Table ─────────────────────────────────── */
+    .variant-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 6px;
+      margin-bottom: 16px;
+    }
+
+    .variant-table th {
+      text-align: left;
+      padding: 12px 16px;
+      background: var(--bg-3);
+      color: var(--text-2);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .variant-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-2);
+    }
+
+    .variant-table tr:last-child td { border-bottom: none; }
+
+    .variant-table td:first-child {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    .variant-table td:nth-child(2) {
+      font-family: var(--mono);
+      color: var(--text-3);
+    }
 
     /* ── Attributes table ───────────────────────────────── */
     .attr-table {
@@ -292,6 +422,11 @@
       z-index: 999;
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .style-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -300,57 +435,311 @@
 
   <!-- Hero -->
   <header class="hero">
-    <div class="hero-eyebrow">CDN Documentation</div>
-    <h1>Sora<br/><span>Icônes</span></h1>
+    <div class="hero-eyebrow">Documentation</div>
+    <h1>Ninz<br/><span>Icônes</span></h1>
     <p class="hero-sub">
-      A beautiful open-source icon library. Drop in a single line and get
-      access to thousands of icons across 5 styles — no build tools required.
+      A beautiful open-source icon library with 7,101 icons across 6 distinct styles.
+      Available as React components, CSS classes, or CDN — choose what fits your project.
     </p>
     <div class="hero-badges">
-      <span class="badge green">✦ 5 styles</span>
-      <span class="badge blue">⚡ jsDelivr CDN</span>
-      <span class="badge pink">◈ Web Component + CSS</span>
+      <span class="badge green">✦ 7,101 icons</span>
+      <span class="badge blue">✦ React + TypeScript</span>
+      <span class="badge pink">✦ Tree-shakeable</span>
+      <span class="badge green">✦ 6 styles</span>
     </div>
   </header>
 
-  <!-- Method 1: CSS -->
+  <!-- Styles Overview -->
   <section class="section">
     <div class="section-label">
       <div class="section-num">01</div>
+      <h2>Icon Styles</h2>
+    </div>
+    <p>Each style offers a unique visual character, giving you the flexibility to match any design language.</p>
+
+    <div class="style-grid">
+      <!-- Bold -->
+      <div class="style-card bold">
+        <div class="style-header">
+          <span class="style-name">Bold</span>
+          <span class="style-count">1,233 icons</span>
+        </div>
+        <p class="style-desc">
+          Solid, high-impact icons with thick strokes and filled shapes. Bold style commands attention — perfect for primary actions, feature highlights, and anywhere you need icons that truly stand out.
+        </p>
+        <div class="style-tags">
+          <span class="style-tag">solid fills</span>
+          <span class="style-tag">thick strokes</span>
+          <span class="style-tag">high contrast</span>
+        </div>
+      </div>
+
+      <!-- Bold Duotone -->
+      <div class="style-card bold-duotone">
+        <div class="style-header">
+          <span class="style-name">Bold Duotone</span>
+          <span class="style-count">1,077 icons</span>
+        </div>
+        <p class="style-desc">
+          Bold strokes combined with duotone layering — a primary solid shape paired with a subtle secondary layer. Creates depth and dimension while maintaining the confident weight of bold style.
+        </p>
+        <div class="style-tags">
+          <span class="style-tag">duotone depth</span>
+          <span class="style-tag">layered fills</span>
+          <span class="style-tag">dimensional</span>
+        </div>
+      </div>
+
+      <!-- Broken -->
+      <div class="style-card broken">
+        <div class="style-header">
+          <span class="style-name">Broken</span>
+          <span class="style-count">1,241 icons</span>
+        </div>
+        <p class="style-desc">
+          Bold icons with intentional gaps and disconnected strokes. Adds visual intrigue and modern edge — great for tech brands, creative portfolios, and anywhere you want icons with personality.
+        </p>
+        <div class="style-tags">
+          <span class="style-tag">intentional gaps</span>
+          <span class="style-tag">disconnected</span>
+          <span class="style-tag">modern edge</span>
+        </div>
+      </div>
+
+      <!-- Duotone -->
+      <div class="style-card duotone">
+        <div class="style-header">
+          <span class="style-name">Line Duotone</span>
+          <span class="style-count">1,085 icons</span>
+        </div>
+        <p class="style-desc">
+          Thin strokes with two-tone depth — a primary thin outline with a secondary filled layer. Offers sophistication and subtle dimension. Perfect for cards, feature sections, and elegant UI.
+        </p>
+        <div class="style-tags">
+          <span class="style-tag">light strokes</span>
+          <span class="style-tag">two-tone</span>
+          <span class="style-tag">sophisticated</span>
+        </div>
+      </div>
+
+      <!-- Linear -->
+      <div class="style-card linear">
+        <div class="style-header">
+          <span class="style-name">Linear</span>
+          <span class="style-count">1,233 icons</span>
+        </div>
+        <p class="style-desc">
+          Clean, consistent single-weight strokes. Linear style is timeless and versatile — ideal for navigation, text-heavy interfaces, and anywhere icons need to be readable without overpowering.
+        </p>
+        <div class="style-tags">
+          <span class="style-tag">single weight</span>
+          <span class="style-tag">clean strokes</span>
+          <span class="style-tag">versatile</span>
+        </div>
+      </div>
+
+      <!-- Outline -->
+      <div class="style-card outline">
+        <div class="style-header">
+          <span class="style-name">Outline</span>
+          <span class="style-count">1,235 icons</span>
+        </div>
+        <p class="style-desc">
+          Minimalist hollow icons with open shapes and balanced proportions. The lightest touch in the collection — perfect for empty states, secondary actions, and minimalist designs.
+        </p>
+        <div class="style-tags">
+          <span class="style-tag">hollow shapes</span>
+          <span class="style-tag">minimalist</span>
+          <span class="style-tag">open forms</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- React Installation -->
+  <section class="section">
+    <div class="section-label">
+      <div class="section-num">02</div>
+      <h2>React Installation</h2>
+    </div>
+    <p>Install via your preferred package manager. The package includes full TypeScript support and is tree-shakeable for optimal bundle size.</p>
+
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot npm"></span> npm</div>
+        <button class="copy-btn" data-copy="npm install @ninzapp/solar-icons">Copy</button>
+      </div>
+      <div class="code-block"><pre><span class="hl-tag">npm</span> <span class="hl-attr">install</span> <span class="hl-val">@ninzapp/solar-icons</span></pre></div>
+    </div>
+
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot yarn"></span> yarn</div>
+        <button class="copy-btn" data-copy="yarn add @ninzapp/solar-icons">Copy</button>
+      </div>
+      <div class="code-block"><pre><span class="hl-tag">yarn</span> <span class="hl-attr">add</span> <span class="hl-val">@ninzapp/solar-icons</span></pre></div>
+    </div>
+
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot pnpm"></span> pnpm</div>
+        <button class="copy-btn" data-copy="pnpm add @ninzapp/solar-icons">Copy</button>
+      </div>
+      <div class="code-block"><pre><span class="hl-tag">pnpm</span> <span class="hl-attr">add</span> <span class="hl-val">@ninzapp/solar-icons</span></pre></div>
+    </div>
+
+    <div class="tip">
+      <span class="tip-icon">✦</span>
+      <span>The package requires <strong>React 17+</strong>. Every icon is a named export — bundlers like Vite and webpack will only ship the icons you actually import.</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- React Usage -->
+  <section class="section">
+    <div class="section-label">
+      <div class="section-num">03</div>
+      <h2>React Usage</h2>
+    </div>
+
+    <!-- Named Import -->
+    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text-1);">Named Import (Recommended)</h3>
+    <p>Import icons directly by name for optimal tree-shaking. Only the icons you import will be included in your bundle.</p>
+
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot js"></span> Named Import</div>
+        <button class="copy-btn" data-copy="import { Icon4kBold, IconHomeLinear, IconSettingsOutline } from '@ninzapp/solar-icons'">Copy</button>
+      </div>
+      <div class="code-block"><pre><span class="hl-key">import</span> { Icon4kBold, IconHomeLinear, IconSettingsOutline } <span class="hl-key">from</span> <span class="hl-str">'@ninzapp/solar-icons'</span>
+
+<span class="hl-key">function</span> App() {
+  <span class="hl-key">return</span> (
+    &lt;div&gt;
+      <span class="hl-tag">&lt;Icon4kBold</span> <span class="hl-attr">size</span>=<span class="hl-val">{32}</span> <span class="hl-tag">/&gt;</span>
+      <span class="hl-tag">&lt;IconHomeLinear</span> <span class="hl-attr">size</span>=<span class="hl-val">{24}</span> <span class="hl-attr">color</span>=<span class="hl-val">"gray"</span> <span class="hl-tag">/&gt;</span>
+      <span class="hl-tag">&lt;IconSettingsOutline</span> <span class="hl-attr">size</span>=<span class="hl-val">{20}</span> <span class="hl-attr">style</span>=<span class="hl-val">{{ color: 'royalblue' }}</span> <span class="hl-tag">/&gt;</span>
+    &lt;/div&gt;
+  )
+}</pre></div>
+    </div>
+
+    <!-- Dynamic Import -->
+    <h3 style="font-size: 16px; font-weight: 600; margin: 24px 0 12px; color: var(--text-1);">Dynamic Import</h3>
+    <p>Use the generic <code style="font-family:var(--mono);font-size:12px;color:var(--accent);">Icon</code> component for dynamic icon selection.</p>
+
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot js"></span> Dynamic Import</div>
+        <button class="copy-btn" data-copy="import { Icon } from '@ninzapp/solar-icons'">Copy</button>
+      </div>
+      <div class="code-block"><pre><span class="hl-key">import</span> { Icon } <span class="hl-key">from</span> <span class="hl-str">'@ninzapp/solar-icons'</span>
+
+<span class="hl-key">function</span> App() {
+  <span class="hl-key">return</span> (
+    &lt;div&gt;
+      <span class="hl-tag">&lt;Icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"4k"</span> <span class="hl-attr">variant</span>=<span class="hl-val">"bold"</span> <span class="hl-attr">size</span>=<span class="hl-val">{32}</span> <span class="hl-tag">/&gt;</span>
+      <span class="hl-tag">&lt;Icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"home"</span> <span class="hl-attr">variant</span>=<span class="hl-val">"linear"</span> <span class="hl-attr">size</span>=<span class="hl-val">{24}</span> <span class="hl-tag">/&gt;</span>
+      <span class="hl-tag">&lt;Icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"settings"</span> <span class="hl-attr">variant</span>=<span class="hl-val">"outline"</span> <span class="hl-tag">/&gt;</span>
+    &lt;/div&gt;
+  )
+}</pre></div>
+    </div>
+
+    <!-- Variant Table -->
+    <table class="variant-table">
+      <thead>
+        <tr>
+          <th>Variant</th>
+          <th>Count</th>
+          <th>Style</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>bold</td><td>1,233</td><td>Solid, heavy strokes</td><td style="font-family:var(--mono);color:var(--accent);">IconAlarmBold</td></tr>
+        <tr><td>bold-duotone</td><td>1,077</td><td>Bold with secondary fill</td><td style="font-family:var(--mono);color:var(--accent);">IconAlarmBoldDuotone</td></tr>
+        <tr><td>broken</td><td>1,241</td><td>Bold with disconnected paths</td><td style="font-family:var(--mono);color:var(--accent);">IconAlarmBroken</td></tr>
+        <tr><td>line-duotone</td><td>1,085</td><td>Thin with secondary fill</td><td style="font-family:var(--mono);color:var(--accent);">IconAlarmLineDuotone</td></tr>
+        <tr><td>linear</td><td>1,233</td><td>Thin, clean strokes</td><td style="font-family:var(--mono);color:var(--accent);">IconAlarmLinear</td></tr>
+        <tr><td>outline</td><td>1,235</td><td>Filled paths, thin strokes</td><td style="font-family:var(--mono);color:var(--accent);">IconAlarmOutline</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- React API Reference -->
+  <section class="section">
+    <div class="section-label">
+      <div class="section-num">04</div>
+      <h2>React API Reference</h2>
+    </div>
+
+    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text-1);">Icon Component (Dynamic)</h3>
+    <div class="method-card">
+      <div class="method-header">
+        <div class="method-title"><span class="method-dot js"></span> Props</div>
+      </div>
+      <div class="code-block" style="padding:0;">
+        <table class="attr-table">
+          <thead>
+            <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>name</td><td>string</td><td>—</td><td>Icon name in kebab-case (e.g. <code style="font-family:var(--mono);font-size:11px;">"add-circle"</code>)</td></tr>
+            <tr><td>variant</td><td>string</td><td>—</td><td>Style variant: <code style="font-family:var(--mono);font-size:11px;">"bold"</code> · <code style="font-family:var(--mono);font-size:11px;">"bold-duotone"</code> · <code style="font-family:var(--mono);font-size:11px;">"broken"</code> · <code style="font-family:var(--mono);font-size:11px;">"line-duotone"</code> · <code style="font-family:var(--mono);font-size:11px;">"linear"</code> · <code style="font-family:var(--mono);font-size:11px;">"outline"</code></td></tr>
+            <tr><td>size</td><td>number | string</td><td>—</td><td>Sets both width and height. Takes precedence over width/height props.</td></tr>
+            <tr><td>width</td><td>number | string</td><td>—</td><td>Icon width</td></tr>
+            <tr><td>height</td><td>number | string</td><td>—</td><td>Icon height</td></tr>
+            <tr><td>color</td><td>string</td><td>currentColor</td><td>Icon fill/stroke color</td></tr>
+            <tr><td>className</td><td>string</td><td>—</td><td>CSS class for styling</td></tr>
+            <tr><td>style</td><td>object</td><td>—</td><td>Inline styles</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tip">
+      <span class="tip-icon">✦</span>
+      <span>All standard SVG props are also supported (e.g. <code style="font-family:var(--mono);font-size:11px;">onClick</code>, <code style="font-family:var(--mono);font-size:11px;">aria-label</code>, etc.)</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CSS Method -->
+  <section class="section">
+    <div class="section-label">
+      <div class="section-num">05</div>
       <h2>CSS Method — Class-based</h2>
     </div>
-    <p>The simplest way. Add one stylesheet, then use <code style="font-family:var(--mono);font-size:12px;color:var(--blue);">&lt;i&gt;</code> tags with classes anywhere in your HTML. No JavaScript required.</p>
+    <p>The simplest way for non-React projects. Add one stylesheet, then use <code style="font-family:var(--mono);font-size:12px;color:var(--blue);">&lt;i&gt;</code> tags with classes anywhere in your HTML.</p>
 
-    <!-- Step 1 -->
     <div class="method-card">
       <div class="method-header">
-        <div class="method-title"><span class="method-dot css"></span> Step 1 — Add to your &lt;head&gt;</div>
-        <button class="copy-btn" data-copy='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/cdn/sora-icons.css"/&gt;
-&lt;script src="https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/cdn/sora-icons-shim.js"&gt;&lt;/script&gt;'>Copy</button>
+        <div class="method-title"><span class="method-dot css"></span> Add to your &lt;head&gt;</div>
+        <button class="copy-btn" data-copy='<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/cdn/CSS/ninz-icons.css"/>'>Copy</button>
       </div>
-      <div class="code-block"><pre><span class="hl-cmt">&lt;!-- Sora Icônes CSS --&gt;</span>
-<span class="hl-tag">&lt;link</span> <span class="hl-attr">rel</span>=<span class="hl-val">"stylesheet"</span>
-      <span class="hl-attr">href</span>=<span class="hl-val">"https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/cdn/sora-icons.css"</span><span class="hl-tag">/&gt;</span>
-<span class="hl-tag">&lt;script</span> <span class="hl-attr">src</span>=<span class="hl-val">"https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/cdn/sora-icons-shim.js"</span><span class="hl-tag">&gt;&lt;/script&gt;</span></pre></div>
+      <div class="code-block"><pre><span class="hl-tag">&lt;link</span> <span class="hl-attr">rel</span>=<span class="hl-val">"stylesheet"</span>
+      <span class="hl-attr">href</span>=<span class="hl-val">"https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/cdn/CSS/ninz-icons.css"</span><span class="hl-tag">/&gt;</span></pre></div>
     </div>
 
-    <!-- Step 2 -->
     <div class="method-card">
       <div class="method-header">
-        <div class="method-title"><span class="method-dot html"></span> Step 2 — Use in HTML</div>
-        <button class="copy-btn" data-copy='<i class="si si-outline si-alarm"></i>
-<i class="si si-bold si-heart si-xl"></i>
-<i class="si si-duotone si-calendar si-2xl" style="color:#e2ff5d"></i>'>Copy</button>
+        <div class="method-title"><span class="method-dot html"></span> Use in HTML</div>
+        <button class="copy-btn" data-copy='<i class="ni ni-bold ni-alarm ni-xl"></i>'>Copy</button>
       </div>
-      <div class="code-block"><pre><span class="hl-cmt">&lt;!-- Format: si  +  si-{style}  +  si-{icon-name} --&gt;</span>
+      <div class="code-block"><pre><span class="hl-cmt">&lt;!-- Format: ni  +  ni-{variant}  +  ni-{icon-name} --&gt;</span>
 
-<span class="hl-tag">&lt;i</span> <span class="hl-attr">class</span>=<span class="hl-val">"si si-outline si-alarm"</span><span class="hl-tag">&gt;&lt;/i&gt;</span>
-<span class="hl-tag">&lt;i</span> <span class="hl-attr">class</span>=<span class="hl-val">"si si-bold si-heart si-xl"</span><span class="hl-tag">&gt;&lt;/i&gt;</span>
-<span class="hl-tag">&lt;i</span> <span class="hl-attr">class</span>=<span class="hl-val">"si si-duotone si-calendar si-2xl"</span> <span class="hl-attr">style</span>=<span class="hl-val">"color:#e2ff5d"</span><span class="hl-tag">&gt;&lt;/i&gt;</span>
-<span class="hl-tag">&lt;i</span> <span class="hl-attr">class</span>=<span class="hl-val">"si si-linear si-bell si-spin"</span><span class="hl-tag">&gt;&lt;/i&gt;</span>  <span class="hl-cmt">&lt;!-- spinning --&gt;</span></pre></div>
+<span class="hl-tag">&lt;i</span> <span class="hl-attr">class</span>=<span class="hl-val">"ni ni-bold ni-alarm"</span><span class="hl-tag">&gt;&lt;/i&gt;</span>
+<span class="hl-tag">&lt;i</span> <span class="hl-attr">class</span>=<span class="hl-val">"ni ni-linear ni-heart ni-xl"</span><span class="hl-tag">&gt;&lt;/i&gt;</span>
+<span class="hl-tag">&lt;i</span> <span class="hl-attr">class</span>=<span class="hl-val">"ni ni-outline ni-settings ni-lg"</span> <span class="hl-attr">style</span>=<span class="hl-val">"color:#e2ff5d"</span><span class="hl-tag">&gt;&lt;/i&gt;</span></pre></div>
     </div>
 
-    <!-- Classes reference -->
     <div class="method-card">
       <div class="method-header">
         <div class="method-title"><span class="method-dot css"></span> CSS Class Reference</div>
@@ -361,115 +750,70 @@
             <tr><th>Class</th><th>Values</th><th>Description</th></tr>
           </thead>
           <tbody>
-            <tr><td>si</td><td>—</td><td>Required base class on every icon</td></tr>
-            <tr><td>si-{style}</td><td>bold · broken · duotone · linear · outline</td><td>Icon style variant</td></tr>
-            <tr><td>si-{name}</td><td>alarm · heart · bell …</td><td>Icon name</td></tr>
-            <tr><td>si-xs / sm / md / lg / xl / 2xl / 3xl</td><td>0.75rem → 3rem</td><td>Size helper</td></tr>
-            <tr><td>si-spin</td><td>—</td><td>Continuous rotation animation</td></tr>
-            <tr><td>si-pulse</td><td>—</td><td>Step-based spin (loading feel)</td></tr>
-            <tr><td>si-muted / primary / success / warning / danger</td><td>—</td><td>Preset color helpers</td></tr>
+            <tr><td>ni</td><td>—</td><td>Required base class on every icon</td></tr>
+            <tr><td>ni-{variant}</td><td>bold · bold-duotone · broken · line-duotone · linear · outline</td><td>Icon style variant</td></tr>
+            <tr><td>ni-{name}</td><td>alarm · heart · settings …</td><td>Icon name</td></tr>
+            <tr><td>ni-xs / sm / md / lg / xl / 2xl</td><td>0.75rem → 3rem</td><td>Size helper classes</td></tr>
+            <tr><td>ni-spin</td><td>—</td><td>Continuous rotation animation</td></tr>
+            <tr><td>ni-pulse</td><td>—</td><td>Step-based spin (loading feel)</td></tr>
           </tbody>
         </table>
       </div>
-    </div>
-
-    <div class="tip">
-      <span class="tip-icon">✦</span>
-      <span>Control color with the CSS <code style="font-family:var(--mono);font-size:11px;">color</code> property — either inline or via a CSS class. The icon inherits <code style="font-family:var(--mono);font-size:11px;">currentColor</code> automatically.</span>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- Method 2: Web Component -->
+  <!-- Web Component -->
   <section class="section">
     <div class="section-label">
-      <div class="section-num">02</div>
-      <h2>Web Component — &lt;sora-icon&gt;</h2>
+      <div class="section-num">06</div>
+      <h2>Web Component — &lt;ninz-icon&gt;</h2>
     </div>
-    <p>The power method. Add one script tag and use <code style="font-family:var(--mono);font-size:12px;color:var(--green);">&lt;sora-icon&gt;</code> anywhere. Injects real inline SVG — perfect for duotone, animations, and dynamic control.</p>
+    <p>Add one script tag and use <code style="font-family:var(--mono);font-size:12px;color:var(--green);">&lt;ninz-icon&gt;</code> anywhere. Injects real inline SVG — perfect for duotone, animations, and dynamic control.</p>
 
-    <!-- Step 1 -->
     <div class="method-card">
       <div class="method-header">
-        <div class="method-title"><span class="method-dot js"></span> Step 1 — Add to your &lt;head&gt;</div>
-        <button class="copy-btn" data-copy='<script src="https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/cdn/sora-icon.js"></script>'>Copy</button>
+        <div class="method-title"><span class="method-dot js"></span> Add to your &lt;head&gt;</div>
+        <button class="copy-btn" data-copy='<script src="https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/cdn/JS/ninz-icon.js"></script>'>Copy</button>
       </div>
-      <div class="code-block"><pre><span class="hl-tag">&lt;script</span> <span class="hl-attr">src</span>=<span class="hl-val">"https://cdn.jsdelivr.net/gh/your-username/sora-icones@latest/cdn/sora-icon.js"</span><span class="hl-tag">&gt;&lt;/script&gt;</span></pre></div>
+      <div class="code-block"><pre><span class="hl-tag">&lt;script</span> <span class="hl-attr">src</span>=<span class="hl-val">"https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/cdn/JS/ninz-icon.js"</span><span class="hl-tag">&gt;&lt;/script&gt;</span></pre></div>
     </div>
 
-    <!-- Step 2 -->
     <div class="method-card">
       <div class="method-header">
-        <div class="method-title"><span class="method-dot wc"></span> Step 2 — Use in HTML</div>
-        <button class="copy-btn" data-copy='<sora-icon name="alarm" style="outline"></sora-icon>
-<sora-icon name="heart" style="bold" size="32" color="#e2ff5d"></sora-icon>
-<sora-icon name="calendar" style="duotone" size="48"></sora-icon>'>Copy</button>
+        <div class="method-title"><span class="method-dot wc"></span> Use in HTML</div>
+        <button class="copy-btn" data-copy='<ninz-icon name="alarm" variant="bold" size="32"></ninz-icon>'>Copy</button>
       </div>
-      <div class="code-block"><pre><span class="hl-cmt">&lt;!-- Basic --&gt;</span>
-<span class="hl-tag">&lt;sora-icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"alarm"</span> <span class="hl-attr">style</span>=<span class="hl-val">"outline"</span><span class="hl-tag">&gt;&lt;/sora-icon&gt;</span>
-
-<span class="hl-cmt">&lt;!-- With size + color --&gt;</span>
-<span class="hl-tag">&lt;sora-icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"heart"</span> <span class="hl-attr">style</span>=<span class="hl-val">"bold"</span> <span class="hl-attr">size</span>=<span class="hl-val">"32"</span> <span class="hl-attr">color</span>=<span class="hl-val">"#e2ff5d"</span><span class="hl-tag">&gt;&lt;/sora-icon&gt;</span>
-
-<span class="hl-cmt">&lt;!-- Custom stroke width --&gt;</span>
-<span class="hl-tag">&lt;sora-icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"bell"</span> <span class="hl-attr">style</span>=<span class="hl-val">"linear"</span> <span class="hl-attr">size</span>=<span class="hl-val">"24"</span> <span class="hl-attr">stroke-width</span>=<span class="hl-val">"1"</span><span class="hl-tag">&gt;&lt;/sora-icon&gt;</span>
-
-<span class="hl-cmt">&lt;!-- Dynamic via JS --&gt;</span>
-<span class="hl-tag">&lt;sora-icon</span> <span class="hl-attr">id</span>=<span class="hl-val">"my-icon"</span> <span class="hl-attr">name</span>=<span class="hl-val">"moon"</span> <span class="hl-attr">style</span>=<span class="hl-val">"outline"</span><span class="hl-tag">&gt;&lt;/sora-icon&gt;</span>
-<span class="hl-tag">&lt;script&gt;</span>
-  document.getElementById(<span class="hl-str">'my-icon'</span>).setAttribute(<span class="hl-str">'name'</span>, <span class="hl-str">'sun'</span>);
-<span class="hl-tag">&lt;/script&gt;</span></pre></div>
-    </div>
-
-    <!-- Attributes table -->
-    <div class="method-card">
-      <div class="method-header">
-        <div class="method-title"><span class="method-dot wc"></span> Attributes</div>
-      </div>
-      <div class="code-block" style="padding:0;">
-        <table class="attr-table">
-          <thead>
-            <tr><th>Attribute</th><th>Default</th><th>Description</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>name</td><td>—</td><td>Icon name (e.g. <code style="font-family:var(--mono);font-size:11px;color:var(--accent);">alarm</code>). Required.</td></tr>
-            <tr><td>style</td><td>outline</td><td>Style variant: bold · broken · duotone · linear · outline</td></tr>
-            <tr><td>size</td><td>1em</td><td>Width &amp; height — any CSS unit or plain number (px)</td></tr>
-            <tr><td>color</td><td>currentColor</td><td>Overrides stroke/fill. Inherits from CSS by default.</td></tr>
-            <tr><td>stroke-width</td><td>SVG default</td><td>Override the icon's stroke width</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="tip">
-      <span class="tip-icon">✦</span>
-      <span>The web component caches every fetched SVG in memory — repeat uses of the same icon cost <strong>zero</strong> extra network requests. Attributes are fully reactive; update them via JS and the icon re-renders instantly.</span>
+      <div class="code-block"><pre><span class="hl-tag">&lt;ninz-icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"alarm"</span> <span class="hl-attr">variant</span>=<span class="hl-val">"bold"</span> <span class="hl-attr">size</span>=<span class="hl-val">"32"</span><span class="hl-tag">&gt;&lt;/ninz-icon&gt;</span>
+<span class="hl-tag">&lt;ninz-icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"heart"</span> <span class="hl-attr">variant</span>=<span class="hl-val">"linear"</span> <span class="hl-attr">color</span>=<span class="hl-val">"#e2ff5d"</span><span class="hl-tag">&gt;&lt;/ninz-icon&gt;</span>
+<span class="hl-tag">&lt;ninz-icon</span> <span class="hl-attr">name</span>=<span class="hl-val">"settings"</span> <span class="hl-attr">variant</span>=<span class="hl-val">"outline"</span><span class="hl-tag">&gt;&lt;/ninz-icon&gt;</span></pre></div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- Version pinning -->
+  <!-- Tree Shaking -->
   <section class="section">
     <div class="section-label">
-      <div class="section-num">03</div>
-      <h2>Version Pinning</h2>
+      <div class="section-num">07</div>
+      <h2>Tree-Shaking</h2>
     </div>
-    <p>Using <code style="font-family:var(--mono);font-size:12px;color:var(--accent);">@latest</code> always pulls the newest release. For production, pin to a specific Git tag to avoid unexpected changes.</p>
+    <p>Every icon is a named export — bundlers like Vite, webpack, and esbuild will only ship the icons you import.</p>
+
     <div class="method-card">
       <div class="method-header">
-        <div class="method-title"><span class="method-dot css"></span> Pinned URL format</div>
+        <div class="method-title"><span class="method-dot js"></span> Example</div>
       </div>
-      <div class="code-block"><pre><span class="hl-cmt">&lt;!-- Latest (development) --&gt;</span>
-https://cdn.jsdelivr.net/gh/your-username/sora-icones<span class="hl-str">@latest</span>/cdn/sora-icons.css
+      <div class="code-block"><pre><span class="hl-cmt">// Only Icon4kBold is bundled</span>
+<span class="hl-key">import</span> { Icon4kBold } <span class="hl-key">from</span> <span class="hl-str">'@ninzapp/solar-icons'</span>
 
-<span class="hl-cmt">&lt;!-- Pinned to v1.0.0 (production recommended) --&gt;</span>
-https://cdn.jsdelivr.net/gh/your-username/sora-icones<span class="hl-str">@1.0.0</span>/cdn/sora-icons.css
+<span class="hl-cmt">// IconHomeLinear is NOT included in your bundle</span></pre></div>
+    </div>
 
-<span class="hl-cmt">&lt;!-- Pinned to a specific commit hash --&gt;</span>
-https://cdn.jsdelivr.net/gh/your-username/sora-icones<span class="hl-str">@a3f92c1</span>/cdn/sora-icons.css</pre></div>
+    <div class="tip">
+      <span class="tip-icon">✦</span>
+      <span>Tree-shaking ensures your bundle only includes the icons you actually use — significantly reducing production bundle size.</span>
     </div>
   </section>
 

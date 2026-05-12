@@ -1,7 +1,7 @@
 /*!
- * Sora Icônes — Web Component
- * Usage:  <sora-icon name="alarm" icon-type="outline" size="32" color="#fff"></sora-icon>
- * CDN:    https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/cdn/sora-icon.js
+ * Ninz Icônes — Web Component
+ * Usage:  <ninz-icon name="alarm" style="outline" size="32" color="#fff"></ninz-icon>
+ * CDN:    https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/cdn/JS/ninz-icon.js
  */
 
 (function () {
@@ -9,26 +9,26 @@
 
   const ICONS_BASE =
     "https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons";
-  const VALID_TYPES = [
+  const VALID_STYLES = [
     "bold",
     "bold-duotone",
     "broken",
-    "line-duotone",
+    "duotone",
     "linear",
     "outline",
   ];
   const cache = new Map(); // SVG text cache
 
   /* ── Fetch with cache ──────────────────────────────────── */
-  function fetchSVG(iconType, name) {
+  function fetchSVG(style, name) {
     // Build icon filename: "alarm" + "-" + "outline" = "alarm-outline"
-    const iconFile = name + "-" + iconType;
+    const iconFile = name + "-" + style;
     const key = iconFile;
     if (cache.has(key)) return Promise.resolve(cache.get(key));
-    const url = `${ICONS_BASE}/${iconType}/${iconFile}.svg`;
+    const url = `${ICONS_BASE}/${style}/${iconFile}.svg`;
     return fetch(url)
       .then((r) => {
-        if (!r.ok) throw new Error(`Sora Icônes: icon not found — ${iconFile}`);
+        if (!r.ok) throw new Error(`Ninz Icônes: icon not found — ${iconFile}`);
         return r.text();
       })
       .then((svg) => {
@@ -38,9 +38,9 @@
   }
 
   /* ── Web Component ─────────────────────────────────────── */
-  class SoraIcon extends HTMLElement {
+  class NinzIcon extends HTMLElement {
     static get observedAttributes() {
-      return ["name", "icon-type", "size", "color", "stroke-width"];
+      return ["name", "style", "size", "color", "stroke-width"];
     }
 
     constructor() {
@@ -58,9 +58,9 @@
     get _iconName() {
       return this.getAttribute("name") || "";
     }
-    get _iconType() {
-      const t = this.getAttribute("icon-type") || "outline";
-      return VALID_TYPES.includes(t) ? t : "outline";
+    get _iconStyle() {
+      const t = this.getAttribute("style") || "outline";
+      return VALID_STYLES.includes(t) ? t : "outline";
     }
     get _size() {
       return this.getAttribute("size") || "1em";
@@ -74,7 +74,7 @@
 
     _render() {
       const name = this._iconName;
-      const iconType = this._iconType;
+      const iconStyle = this._iconStyle;
       const size = this._size;
       const color = this._color;
 
@@ -90,7 +90,7 @@
         size,
       );
 
-      fetchSVG(iconType, name)
+      fetchSVG(iconStyle, name)
         .then((svg) => {
           /* Patch SVG attributes for color + size control */
           let patched = svg.replace(/<svg([^>]*)>/, (_, attrs) => {
@@ -153,7 +153,7 @@
   }
 
   /* Register only once */
-  if (!customElements.get("sora-icon")) {
-    customElements.define("sora-icon", SoraIcon);
+  if (!customElements.get("ninz-icon")) {
+    customElements.define("ninz-icon", NinzIcon);
   }
 })();

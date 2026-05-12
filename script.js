@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────
-   Sora Icônes — script.js
+   Ninz Icônes — script.js
    Expects: icons.json  (Option B structure)
    {
      "bold":    ["icon-name", ...],
@@ -51,11 +51,11 @@ function generateIconCSS(icons) {
       // Create clean class name: "4k-bold" -> "4k"
       const cleanName = name.replace(/-(bold|duotone|broken|linear|outline)(-duotone)?$/, "");
       const svgFile = `${name}.svg`;
-      css += `.si-${styleKey}.si-${cleanName} {\n`;
+      css += `.ni-${styleKey}.ni-${cleanName} {\n`;
       css += `  -webkit-mask-image: url("../../icons/${folder}/${svgFile}");\n`;
       css += `  mask-image: url("../../icons/${folder}/${svgFile}");\n`;
       css += `}\n`;
-      css += `.si-${cleanName} { --si-name: ${cleanName}; }\n`;
+      css += `.ni-${cleanName} { --ni-name: ${cleanName}; }\n`;
     });
   }
 
@@ -63,11 +63,11 @@ function generateIconCSS(icons) {
 }
 
 function injectIconCSS(icons) {
-  const existing = document.getElementById("si-dynamic-css");
+  const existing = document.getElementById("ni-dynamic-css");
   if (existing) existing.remove();
 
   const style = document.createElement("style");
-  style.id = "si-dynamic-css";
+  style.id = "ni-dynamic-css";
   style.textContent = generateIconCSS(icons);
   document.head.appendChild(style);
 }
@@ -542,7 +542,7 @@ function handleModalAction(action, btn) {
   }
 
   if (action === "copy-cdn") {
-    const tagCode = `<i class="si si-${name}"></i>`;
+    const tagCode = `<i class="ni ni-${name}"></i>`;
     copyToClipboard(tagCode, "Tag copied!");
   }
 
@@ -556,10 +556,10 @@ function handleModalAction(action, btn) {
 const iconSvg = \`${text.replace(/`/g, "\\`")}\`;
 
 // Or use as component
-import { Sora${toPascalCase(style)}Icon } from '@ninzoc/icons';
+import { Ninz${toPascalCase(style)}Icon } from '@ninzapp/ninz-icons';
 
 function MyComponent() {
-  return <Sora${toPascalCase(style)}Icon name="${name}" />;
+  return <Ninz${toPascalCase(style)}Icon name="${name}" />;
 }`;
       copyToClipboard(jsxCode, "JSX code copied!");
     });
@@ -906,3 +906,56 @@ function extractSvgPath(svgText) {
   }
   return "";
 }
+
+/* ── Package Modal ──────────────────────────────── */
+const pkgModalEl = document.getElementById("pkg-modal");
+const pkgCodeEl = document.getElementById("pkg-code");
+const pkgModalTitleEl = document.getElementById("pkg-modal-title");
+const pkgCopyBtnEl = document.getElementById("pkg-copy-btn");
+
+const pkgInstallCommands = {
+  npm: "npm install @ninzapp/solar-icons",
+  yarn: "yarn add @ninzapp/solar-icons",
+  pnpm: "pnpm add @ninzapp/solar-icons"
+};
+
+function openPkgModal(pkgName) {
+  pkgModalTitleEl.textContent = `Install via ${pkgName.toUpperCase()}`;
+  pkgCodeEl.textContent = pkgInstallCommands[pkgName];
+  pkgModalEl.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
+function closePkgModal() {
+  pkgModalEl.classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+pkgModalEl.addEventListener("click", (e) => {
+  if (e.target === pkgModalEl || e.target.closest(".pkg-modal-backdrop")) {
+    closePkgModal();
+  }
+});
+
+document.getElementById("pkg-modal-close").addEventListener("click", closePkgModal);
+
+// Package buttons
+document.querySelectorAll(".pkg-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    openPkgModal(btn.dataset.pkg);
+  });
+});
+
+// Package copy button
+pkgCopyBtnEl.addEventListener("click", () => {
+  const code = pkgCodeEl.textContent;
+  copyToClipboard(code, "Command copied!");
+  closePkgModal();
+});
+
+// Close modal on Escape
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && pkgModalEl.classList.contains("show")) {
+    closePkgModal();
+  }
+});

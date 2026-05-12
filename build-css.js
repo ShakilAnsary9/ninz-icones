@@ -15,12 +15,12 @@ const folderMap = {
 const CDN_BASE = "https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/icons";
 
 let css = `/*!
- * Sora Icônes — Auto-generated CSS
+ * Ninz Icônes — Auto-generated CSS
  * Generated from icons.json
  */
 
-[class^="si-"],
-[class*=" si-"] {
+[class^="ni-"],
+[class*=" ni-"] {
   display: inline-block;
   width: 3em;
   height: 3em;
@@ -36,12 +36,12 @@ let css = `/*!
 }
 
 /* ── Size helpers ────────────────────────────────────────── */
-.si-xs { font-size: 0.75rem; }
-.si-sm { font-size: 0.875rem; }
-.si-md { font-size: 1rem; }
-.si-lg { font-size: 1.5rem; }
-.si-xl { font-size: 2rem; }
-.si-2xl { font-size: 3rem; }
+.ni-xs { font-size: 0.75rem; }
+.ni-sm { font-size: 0.875rem; }
+.ni-md { font-size: 1rem; }
+.ni-lg { font-size: 1.5rem; }
+.ni-xl { font-size: 2rem; }
+.ni-2xl { font-size: 3rem; }
 
 /* ── Icons ───────────────────────────────────────────────── */
 `;
@@ -49,7 +49,7 @@ let css = `/*!
 for (const [styleKey, folder] of Object.entries(folderMap)) {
   const names = icons[styleKey] || [];
   names.forEach(name => {
-    css += `.si-${name} {\n`;
+    css += `.ni-${name} {\n`;
     css += `  -webkit-mask-image: url("../../icons/${folder}/${name}.svg");\n`;
     css += `  mask-image: url("../../icons/${folder}/${name}.svg");\n`;
     css += `}\n`;
@@ -57,7 +57,7 @@ for (const [styleKey, folder] of Object.entries(folderMap)) {
 }
 
 // Write to CDN CSS file
-const outPath = path.join(__dirname, "cdn", "CSS", "sora-icons.css");
+const outPath = path.join(__dirname, "cdn", "CSS", "ninz-icons.css");
 fs.writeFileSync(outPath, css);
 
 const totalIcons = Object.values(icons).reduce((sum, arr) => sum + arr.length, 0);

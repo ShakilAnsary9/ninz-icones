@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sora Icônes</title>
+    <title>Ninz Icônes</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -16,7 +16,7 @@
       <aside class="sidebar">
         <div class="brand">
           <span class="brand-icon">✦</span>
-          <span class="brand-name">Sora Icônes</span>
+          <span class="brand-name">Ninz Icônes</span>
         </div>
 
         <nav class="style-tabs">
@@ -40,6 +40,54 @@
           </button>
         </nav>
 
+        <div class="pkg-section">
+          <div class="pkg-label">NPM</div>
+          <div class="pkg-buttons">
+            <button class="pkg-btn" data-pkg="npm">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+              >
+                <!-- Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE -->
+                <path d="M20 4H4v16h8V8h4v12h4V4" fill="currentColor" />
+              </svg>
+              <span>npm</span>
+            </button>
+            <button class="pkg-btn" data-pkg="yarn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="29.82"
+                height="32"
+                viewBox="0 0 477 512"
+              >
+                <!-- Icon from File Icons by John Gardner - https://github.com/file-icons/icons/blob/master/LICENSE.md -->
+                <path
+                  fill="currentColor"
+                  d="M201.875 54.078S223.312-11.056 243.1 1.641c6.101 3.958 28.032 52.767 28.032 52.767s23.416-13.686 26.054-8.575c30.535 93.073 2.41 158.697-37.926 211.067c53.649 50.098 62.982 101.431 52.602 166.38c50.47.108 76.45-49.081 140.82-52.107c28.857-.495 30.341 33.309 8.575 38.585c-44.75 6.317-88.88 56.237-179.077 81.624c-11.635 17.708-81.148 15.728-135.874 20.612c-57.902.615-42.944-44.48-22.096-52.107c-13.596-7.408-14.15-14.796-16.819-14.016c-14.48 77.126-53.98 53.626-78.16 46.995c-18.634-9.894 1.319-33.144 1.319-33.144c-18.14 7.776-32.457-26.504-30.341-60.187c1.979-26.878 31.99-52.932 31.99-52.932c-1.789-67.104 17.813-110.758 69.915-147.417C83.91 177.75 62.91 143.25 90.606 103.06C126.66 93 133.66 50.25 201.876 54.078"
+                />
+              </svg>
+              <span>yarn</span>
+            </button>
+            <button class="pkg-btn" data-pkg="pnpm">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+              >
+                <!-- Icon from Lineicons by Lineicons - https://github.com/LineiconsHQ/Lineicons/blob/main/LICENSE.md -->
+                <path
+                  fill="currentColor"
+                  d="M21 8.626h-5.625V3H21zm-6.188 0H9.187V3h5.625zm-6.187 0H3V3h5.625zM21 14.813h-5.625V9.188H21zm-6.188 0H9.187V9.188h5.625zm0 6.187H9.187v-5.625h5.625zM21 21h-5.625v-5.625H21zM8.625 21H3v-5.625h5.625z"
+                />
+              </svg>
+              <span>pnpm</span>
+            </button>
+          </div>
+        </div>
+
         <div class="cdn-section">
           <div class="cdn-label">CDN</div>
           <div class="cdn-row">
@@ -48,7 +96,7 @@
               class="cdn-input"
               id="cdn-link"
               readonly
-              value='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@v1.0.0/cdn/CSS/sora-icons.css" integrity="sha384-3ZCsA64ggc5QiVxyGKbCU40m1vq29rgwJ0WtsiCZ5mcChppsC7sjhKeCy0rSe31k" crossorigin="anonymous"&gt;'
+              value='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/cdn/CSS/ninz-icons.css" /&gt;'
             />
             <!-- <a
               href="https://github.com/ShakilAnsary9/ninz-icones"
@@ -88,7 +136,7 @@
               class="cdn-input"
               id="wc-link"
               readonly
-              value='&lt;script src="https://rawcdn.githack.com/ShakilAnsary9/ninz-icones/refs/heads/main/cdn/sora-icon.js"&gt;&lt;/script&gt;'
+              value='&lt;script src="https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@latest/cdn/JS/ninz-icon.js"&gt;&lt;/script&gt;'
             />
             <button class="cdn-copy-btn" id="wc-copy-btn">
               <svg
@@ -228,6 +276,48 @@
           <button id="load-more" style="display: none">Load more</button>
         </div>
       </main>
+    </div>
+
+    <!-- Package Modal -->
+    <div class="pkg-modal" id="pkg-modal">
+      <div class="pkg-modal-backdrop"></div>
+      <div class="pkg-modal-content">
+        <div class="pkg-modal-header">
+          <h3 id="pkg-modal-title">Install Package</h3>
+          <button class="pkg-modal-close" id="pkg-modal-close">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="pkg-modal-body">
+          <div class="pkg-code-row">
+            <code class="pkg-code" id="pkg-code"></code>
+            <button class="pkg-copy-btn" id="pkg-copy-btn">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Toast -->

@@ -8,7 +8,10 @@
       "Bash(git push *)",
       "Bash(curl -s \"https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@v1.0.0/cdn/sora-icon.js\")",
       "Bash(git show *)",
-      "Bash(curl -s \"https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/sora-icon.js\")"
+      "Bash(curl -s \"https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@main/cdn/sora-icon.js\")",
+      "PowerShell(powershell -Command \"$data = Get-Content 'd:\\\\Projects\\\\ninz-icones\\\\icons.json' -Raw | ConvertFrom-Json; $data.PSObject.Properties | ForEach-Object { Write-Host \\\\\"$\\($_.Name\\): $\\($_.Value.Count\\) icons\\\\\" }\")",
+      "Bash(powershell -NoProfile -Command \"Get-ChildItem icons/bold -Filter *.svg | Measure-Object | Select-Object -ExpandProperty Count\")",
+      "Bash(powershell -NoProfile -Command \"Get-ChildItem icons/outline -Filter *.svg | Measure-Object | Select-Object -ExpandProperty Count\")"
     ]
   }
 }
