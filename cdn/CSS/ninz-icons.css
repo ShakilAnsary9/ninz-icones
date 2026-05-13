@@ -6,8 +6,8 @@
 [class^="ni-"],
 [class*=" ni-"] {
   display: inline-block;
-  width: 3em;
-  height: 3em;
+  width: 1em;
+  height: 1em;
   background-color: currentColor;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
@@ -26,6 +26,66 @@
 .ni-lg { font-size: 1.5rem; }
 .ni-xl { font-size: 2rem; }
 .ni-2xl { font-size: 3rem; }
+
+/* ── Color helpers ────────────────────────────────────────── */
+.ni-primary { color: #3b82f6; }
+.ni-secondary { color: #6b7280; }
+.ni-success { color: #22c55e; }
+.ni-danger { color: #ef4444; }
+.ni-warning { color: #f59e0b; }
+.ni-info { color: #06b6d4; }
+.ni-white { color: #ffffff; }
+.ni-black { color: #000000; }
+
+/* ── Animation helpers ────────────────────────────────────── */
+.ni-spin {
+  animation: ni-spin var(--ni-speed, 1s) linear infinite;
+}
+.ni-spin-fast {
+  animation: ni-spin var(--ni-speed, 0.5s) linear infinite;
+}
+.ni-spin-slow {
+  animation: ni-spin var(--ni-speed, 2s) linear infinite;
+}
+.ni-pulse {
+  animation: ni-pulse var(--ni-speed, 1.5s) ease-in-out infinite;
+}
+.ni-pulse-fast {
+  animation: ni-pulse var(--ni-speed, 0.75s) ease-in-out infinite;
+}
+.ni-pulse-slow {
+  animation: ni-pulse var(--ni-speed, 2.5s) ease-in-out infinite;
+}
+.ni-bounce {
+  animation: ni-bounce var(--ni-speed, 1s) ease-in-out infinite;
+}
+.ni-shake {
+  animation: ni-shake var(--ni-speed, 0.5s) ease-in-out infinite;
+}
+.ni-fade {
+  animation: ni-fade var(--ni-speed, 1.5s) ease-in-out infinite;
+}
+
+@keyframes ni-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes ni-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.9); }
+}
+@keyframes ni-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30%); }
+}
+@keyframes ni-shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-15deg); }
+  75% { transform: rotate(15deg); }
+}
+@keyframes ni-fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
 
 /* ── Icons ───────────────────────────────────────────────── */
 .ni-4k-bold {
