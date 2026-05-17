@@ -37,19 +37,22 @@ function generateIconCSS(icons) {
   let css = "/* Auto-generated icon CSS */\n";
 
   const styles = {
-    "bold": "bold",
+    bold: "bold",
     "bold-duotone": "bold-duotone",
-    "broken": "broken",
-    "duotone": "duotone",
-    "linear": "linear",
-    "outline": "outline"
+    broken: "broken",
+    duotone: "duotone",
+    linear: "linear",
+    outline: "outline",
   };
 
   for (const [styleKey, folder] of Object.entries(styles)) {
     const names = icons[styleKey] || [];
-    names.forEach(name => {
+    names.forEach((name) => {
       // Create clean class name: "4k-bold" -> "4k"
-      const cleanName = name.replace(/-(bold|duotone|broken|linear|outline)(-duotone)?$/, "");
+      const cleanName = name.replace(
+        /-(bold|duotone|broken|linear|outline)(-duotone)?$/,
+        "",
+      );
       const svgFile = `${name}.svg`;
       css += `.ni-${styleKey}.ni-${cleanName} {\n`;
       css += `  -webkit-mask-image: url("../../icons/${folder}/${svgFile}");\n`;
@@ -427,7 +430,10 @@ function updateCounts() {
   countEl.textContent = `${shown} / ${filtered.length} icons`;
 
   // Calculate total icons across all styles
-  const allTotal = Object.values(allIcons).reduce((sum, arr) => sum + (arr?.length || 0), 0);
+  const allTotal = Object.values(allIcons).reduce(
+    (sum, arr) => sum + (arr?.length || 0),
+    0,
+  );
   totalEl.textContent = `${allTotal} icons`;
 }
 
@@ -483,14 +489,17 @@ function setupScrollLoader() {
   sentinel.style.height = "1px";
   document.querySelector(".grid-wrap").appendChild(sentinel);
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && page * PAGE_SIZE < filtered.length) {
-        page++;
-        renderGrid(false);
-      }
-    });
-  }, { rootMargin: "200px" });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && page * PAGE_SIZE < filtered.length) {
+          page++;
+          renderGrid(false);
+        }
+      });
+    },
+    { rootMargin: "200px" },
+  );
 
   observer.observe(sentinel);
 }
@@ -541,6 +550,13 @@ function handleModalAction(action, btn) {
     });
   }
 
+  if (action === "download-svg") {
+    fetchSvgText(src).then((text) => {
+      downloadFile(`${name}.svg`, text, "image/svg+xml");
+      showToast("SVG downloaded!");
+    });
+  }
+
   if (action === "copy-cdn") {
     const tagCode = `<i class="ni ni-${name}"></i>`;
     copyToClipboard(tagCode, "Tag copied!");
@@ -556,10 +572,10 @@ function handleModalAction(action, btn) {
 const iconSvg = \`${text.replace(/`/g, "\\`")}\`;
 
 // Or use as component
-import { Ninz${toPascalCase(style)}Icon } from '@ninzapp/ninz-icons';
+import { Ni${toPascalCase(name)} } from '@ninzapp/ninz-icons';
 
 function MyComponent() {
-  return <Ninz${toPascalCase(style)}Icon name="${name}" />;
+  return <Ni${toPascalCase(name)} />;
 }`;
       copyToClipboard(jsxCode, "JSX code copied!");
     });
@@ -699,7 +715,9 @@ wcModalEl.addEventListener("click", (e) => {
   }
 });
 
-document.getElementById("wc-modal-close").addEventListener("click", closeWcModal);
+document
+  .getElementById("wc-modal-close")
+  .addEventListener("click", closeWcModal);
 
 document.querySelectorAll(".wc-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -715,7 +733,7 @@ function handleWcFramework(framework) {
   switch (framework) {
     case "vue": {
       const vueCode = `<script setup>
-defineOptions({ name: 'Si${componentName}' })
+defineOptions({ name: 'Ni${componentName}' })
 
 defineProps({
   size: { type: [String, Number], default: '1em' },
@@ -751,7 +769,7 @@ ${extractSvgPath(wcSvgText)}
 
 <script lang="ts">
 export default {
-  name: 'Si${componentName}'
+  name: 'Ni${componentName}'
 }
 </script>`;
       copyToClipboard(vueTsCode, "Vue + TS component copied!", true);
@@ -765,12 +783,12 @@ export default {
         .trim();
       const reactCode = `import React from 'react'
 
-export function Si${componentName}(props) {
+export function Ni${componentName}(props) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>${svgContent}</svg>
   )
 }
-export default Si${componentName}`;
+export default Ni${componentName}`;
       copyToClipboard(reactCode, "React component copied!");
       break;
     }
@@ -782,12 +800,12 @@ export default Si${componentName}`;
         .trim();
       const reactTsCode = `import React, { SVGProps } from 'react'
 
-export function Si${componentName}(props: SVGProps<SVGSVGElement>) {
+export function Ni${componentName}(props: SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>${svgContent}</svg>
   )
 }
-export default Si${componentName}`;
+export default Ni${componentName}`;
       copyToClipboard(reactTsCode, "React + TS component copied!");
       break;
     }
@@ -807,7 +825,7 @@ export default Si${componentName}`;
         .replace(/<\/svg>/i, "")
         .replace(/<script[\s\S]*?<\/script>/gi, "")
         .trim();
-      const qwikCode = `export function Si${componentName}(props: QwikIntrinsicElements['svg'], key: string) {
+      const qwikCode = `export function Ni${componentName}(props: QwikIntrinsicElements['svg'], key: string) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props} key={key}>${svgContent}</svg>
   )
@@ -821,7 +839,7 @@ export default Si${componentName}`;
         .replace(/<\/svg>/i, "")
         .replace(/<script[\s\S]*?<\/script>/gi, "")
         .trim();
-      const solidCode = `export function Si${componentName}(props: JSX.IntrinsicElements['svg']) {
+      const solidCode = `export function Ni${componentName}(props: JSX.IntrinsicElements['svg']) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>${svgContent}</svg>
   )
@@ -863,11 +881,14 @@ const props = Astro.props
       rnContent = rnContent.replace(/<\/g>/gi, "</G>");
 
       // Remove attributes not valid in RN (stroke, stroke-width, clip-rule, fill-rule, etc)
-      rnContent = rnContent.replace(/\s*(stroke|stroke-width|stroke-linecap|stroke-linejoin|clip-rule|fill-rule)="[^"]*"/gi, "");
+      rnContent = rnContent.replace(
+        /\s*(stroke|stroke-width|stroke-linecap|stroke-linejoin|clip-rule|fill-rule)="[^"]*"/gi,
+        "",
+      );
 
       const rnCode = `import Svg, { Path, G } from 'react-native-svg';
 
-export function Si${componentName}(props) {
+export function Ni${componentName}(props) {
   return (
     <Svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">${rnContent}</Svg>
   )
@@ -902,7 +923,10 @@ function extractSvgPath(svgText) {
     let content = match[1].trim();
     content = content.replace(/<script[\s\S]*?<\/script>/gi, "");
     // Indent each line
-    return content.split("\n").map(line => "    " + line).join("\n");
+    return content
+      .split("\n")
+      .map((line) => "    " + line)
+      .join("\n");
   }
   return "";
 }
@@ -916,7 +940,7 @@ const pkgCopyBtnEl = document.getElementById("pkg-copy-btn");
 const pkgInstallCommands = {
   npm: "npm install @ninzapp/solar-icons",
   yarn: "yarn add @ninzapp/solar-icons",
-  pnpm: "pnpm add @ninzapp/solar-icons"
+  pnpm: "pnpm add @ninzapp/solar-icons",
 };
 
 function openPkgModal(pkgName) {
@@ -937,7 +961,9 @@ pkgModalEl.addEventListener("click", (e) => {
   }
 });
 
-document.getElementById("pkg-modal-close").addEventListener("click", closePkgModal);
+document
+  .getElementById("pkg-modal-close")
+  .addEventListener("click", closePkgModal);
 
 // Package buttons
 document.querySelectorAll(".pkg-btn").forEach((btn) => {
