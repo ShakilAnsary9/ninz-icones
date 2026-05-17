@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ninz Icônes</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.8.0/dist/themes/monolith.min.css"
@@ -96,7 +97,7 @@
               class="cdn-input"
               id="cdn-link"
               readonly
-              value='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@v1.3.0/cdn/CSS/ninz-icons.min.css" /&gt;'
+              value='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ShakilAnsary9/ninz-icones@v1.3.0/cdn/CSS/ninz-icons.min.css" integrity="sha384-GoMQGHwSXCKwmhAEOXDvEoi65PWI2bijKnMMyx+XsYyvHZ1ydpfYSxS0G4ITV2dr" crossorigin="anonymous"&gt;'
             />
             <!-- <a
               href="https://github.com/ShakilAnsary9/ninz-icones"
@@ -255,6 +256,14 @@
                 stroke-linejoin="round"
               >
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            </button>
+            <button class="select-toggle" id="select-toggle" title="Multi-select">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
               </svg>
             </button>
             <span class="badge" id="showing-count"></span>
@@ -771,6 +780,43 @@
             </svg>
             <span>Data URL</span>
           </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bulk Download Bag -->
+    <button class="bulk-bag" id="bulk-bag" style="display: none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+      </svg>
+      <span class="bulk-count" id="bulk-count">0</span>
+    </button>
+
+    <!-- Bulk Select Off-canvas -->
+    <div class="bulk-drawer" id="bulk-drawer">
+      <div class="bulk-drawer-backdrop" id="bulk-drawer-backdrop"></div>
+      <div class="bulk-drawer-content">
+        <div class="bulk-drawer-header">
+          <h3>Selected Icons <span id="bulk-header-count">(0)</span></h3>
+          <button class="bulk-drawer-close" id="bulk-drawer-close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="bulk-drawer-grid" id="bulk-drawer-grid"></div>
+        <div class="bulk-drawer-footer">
+          <button class="bulk-download-btn" id="bulk-download-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download ZIP
+          </button>
+          <button class="bulk-clear-btn" id="bulk-clear-btn">Clear All</button>
         </div>
       </div>
     </div>

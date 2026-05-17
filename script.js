@@ -209,9 +209,13 @@ function makeCard(name, animIndex) {
   card.addEventListener("mouseleave", hideTooltip);
   card.addEventListener("mousemove", (e) => moveTooltip(e));
 
-  /* Click to open modal */
+  /* Click to open modal or select */
   card.addEventListener("click", () => {
-    openModal(name, imgSrc);
+    if (selectionMode) {
+      toggleIconSelection(name, imgSrc);
+    } else {
+      openModal(name, imgSrc);
+    }
   });
 
   return card;
@@ -984,4 +988,184 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && pkgModalEl.classList.contains("show")) {
     closePkgModal();
   }
+});
+
+/* ── Bulk Download ─────────────────────────────────────── */
+const selectToggle = document.getElementById("select-toggle");
+const bulkBag = document.getElementById("bulk-bag");
+const bulkCountEl = document.getElementById("bulk-count");
+const bulkDrawer = document.getElementById("bulk-drawer");
+const bulkDrawerGrid = document.getElementById("bulk-drawer-grid");
+const bulkHeaderCount = document.getElementById("bulk-header-count");
+
+let selectionMode = false;
+let selectedIcons = [];
+
+function toggleSelectionMode() {
+  selectionMode = !selectionMode;
+  selectToggle.classList.toggle("active", selectionMode);
+  document.body.classList.toggle("selection-mode", selectionMode);
+
+  if (!selectionMode) {
+    selectedIcons = [];
+    updateBulkUI();
+  }
+}
+
+selectToggle.addEventListener("click", toggleSelectionMode);
+
+function toggleIconSelection(name, imgSrc) {
+  const index = selectedIcons.findIndex((i) => i.name === name);
+  if (index > -1) {
+    selectedIcons.splice(index, 1);
+  } else {
+    selectedIcons.push({ name, imgSrc, style });
+  }
+  updateBulkUI();
+}
+
+function updateBulkUI() {
+  const count = selectedIcons.length;
+
+  bulkCountEl.textContent = count;
+  bulkBag.style.display = count > 0 ? "flex" : "none";
+
+  document.querySelectorAll(".icon-card").forEach((card) => {
+    const name = card.querySelector(".icon-name").textContent;
+    const isSelected = selectedIcons.some((i) => i.name === name);
+    card.classList.toggle("selected", isSelected);
+  });
+
+  renderBulkDrawer();
+}
+
+function renderBulkDrawer() {
+  bulkHeaderCount.textContent = `(${selectedIcons.length})`;
+  bulkDrawerGrid.innerHTML = "";
+
+  selectedIcons.forEach((icon, index) => {
+    const card = document.createElement("div");
+    card.className = "bulk-icon-card";
+    card.draggable = true;
+    card.dataset.index = index;
+
+    card.innerHTML = `
+      <img src="${icon.imgSrc}" alt="${icon.name}" />
+      <div class="remove-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </div>
+    `;
+
+    card.addEventListener("click", (e) => {
+      if (e.target.closest(".remove-icon")) {
+        selectedIcons.splice(index, 1);
+        updateBulkUI();
+      }
+    });
+
+    card.addEventListener("dragstart", handleDragStart);
+    card.addEventListener("dragend", handleDragEnd);
+    card.addEventListener("dragover", handleDragOver);
+    card.addEventListener("dragleave", handleDragLeave);
+    card.addEventListener("drop", handleDrop);
+
+    bulkDrawerGrid.appendChild(card);
+  });
+}
+
+let draggedIndex = null;
+
+function handleDragStart(e) {
+  draggedIndex = parseInt(e.target.dataset.index);
+  e.target.classList.add("dragging");
+  e.dataTransfer.effectAllowed = "move";
+  e.dataTransfer.setData("text/plain", draggedIndex);
+}
+
+function handleDragEnd(e) {
+  e.target.classList.remove("dragging");
+}
+
+function handleDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = "move";
+  const card = e.target.closest(".bulk-icon-card");
+  if (card) {
+    document.querySelectorAll(".bulk-icon-card").forEach((c) => c.classList.remove("drag-over"));
+    card.classList.add("drag-over");
+  }
+}
+
+function handleDragLeave(e) {
+  const card = e.target.closest(".bulk-icon-card");
+  if (card && !card.contains(e.relatedTarget)) {
+    card.classList.remove("drag-over");
+  }
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  const card = e.target.closest(".bulk-icon-card");
+  if (!card) return;
+  
+  const dropIndex = parseInt(card.dataset.index);
+  const currentDraggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
+  
+  if (currentDraggedIndex !== null && !isNaN(dropIndex) && currentDraggedIndex !== dropIndex) {
+    const item = selectedIcons.splice(currentDraggedIndex, 1)[0];
+    selectedIcons.splice(dropIndex, 0, item);
+    renderBulkDrawer();
+  }
+  document.querySelectorAll(".bulk-icon-card").forEach((c) => c.classList.remove("drag-over"));
+}
+
+bulkBag.addEventListener("click", () => {
+  bulkDrawer.classList.add("show");
+  document.body.style.overflow = "hidden";
+});
+
+function closeBulkDrawer() {
+  bulkDrawer.classList.remove("show");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("bulk-drawer-close").addEventListener("click", closeBulkDrawer);
+document.getElementById("bulk-drawer-backdrop").addEventListener("click", closeBulkDrawer);
+
+document.getElementById("bulk-clear-btn").addEventListener("click", () => {
+  selectedIcons = [];
+  updateBulkUI();
+});
+
+document.getElementById("bulk-download-btn").addEventListener("click", async () => {
+  if (selectedIcons.length === 0) return;
+
+  showToast("Preparing ZIP...");
+
+  const zip = new JSZip();
+
+  const fetchPromises = selectedIcons.map(async (icon) => {
+    try {
+      const response = await fetch(icon.imgSrc);
+      const svgText = await response.text();
+      zip.file(`${icon.name}.svg`, svgText);
+    } catch (e) {
+      console.error(`Failed to fetch ${icon.name}`);
+    }
+  });
+
+  await Promise.all(fetchPromises);
+
+  const content = await zip.generateAsync({ type: "blob" });
+  const url = URL.createObjectURL(content);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "ninz-icons.zip";
+  a.click();
+  URL.revokeObjectURL(url);
+
+  showToast("ZIP downloaded!");
+  closeBulkDrawer();
 });
