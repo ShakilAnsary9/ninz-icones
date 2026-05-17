@@ -37,19 +37,22 @@ function generateIconCSS(icons) {
   let css = "/* Auto-generated icon CSS */\n";
 
   const styles = {
-    "bold": "bold",
+    bold: "bold",
     "bold-duotone": "bold-duotone",
-    "broken": "broken",
-    "duotone": "duotone",
-    "linear": "linear",
-    "outline": "outline"
+    broken: "broken",
+    duotone: "duotone",
+    linear: "linear",
+    outline: "outline",
   };
 
   for (const [styleKey, folder] of Object.entries(styles)) {
     const names = icons[styleKey] || [];
-    names.forEach(name => {
+    names.forEach((name) => {
       // Create clean class name: "4k-bold" -> "4k"
-      const cleanName = name.replace(/-(bold|duotone|broken|linear|outline)(-duotone)?$/, "");
+      const cleanName = name.replace(
+        /-(bold|duotone|broken|linear|outline)(-duotone)?$/,
+        "",
+      );
       const svgFile = `${name}.svg`;
       css += `.ni-${styleKey}.ni-${cleanName} {\n`;
       css += `  -webkit-mask-image: url("../../icons/${folder}/${svgFile}");\n`;
@@ -427,7 +430,10 @@ function updateCounts() {
   countEl.textContent = `${shown} / ${filtered.length} icons`;
 
   // Calculate total icons across all styles
-  const allTotal = Object.values(allIcons).reduce((sum, arr) => sum + (arr?.length || 0), 0);
+  const allTotal = Object.values(allIcons).reduce(
+    (sum, arr) => sum + (arr?.length || 0),
+    0,
+  );
   totalEl.textContent = `${allTotal} icons`;
 }
 
@@ -483,14 +489,17 @@ function setupScrollLoader() {
   sentinel.style.height = "1px";
   document.querySelector(".grid-wrap").appendChild(sentinel);
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && page * PAGE_SIZE < filtered.length) {
-        page++;
-        renderGrid(false);
-      }
-    });
-  }, { rootMargin: "200px" });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && page * PAGE_SIZE < filtered.length) {
+          page++;
+          renderGrid(false);
+        }
+      });
+    },
+    { rootMargin: "200px" },
+  );
 
   observer.observe(sentinel);
 }
@@ -538,6 +547,13 @@ function handleModalAction(action, btn) {
   if (action === "copy-svg") {
     fetchSvgText(src).then((text) => {
       copyToClipboard(text, "SVG code copied!");
+    });
+  }
+
+  if (action === "download-svg") {
+    fetchSvgText(src).then((text) => {
+      downloadFile(`${name}.svg`, text, "image/svg+xml");
+      showToast("SVG downloaded!");
     });
   }
 
@@ -699,7 +715,9 @@ wcModalEl.addEventListener("click", (e) => {
   }
 });
 
-document.getElementById("wc-modal-close").addEventListener("click", closeWcModal);
+document
+  .getElementById("wc-modal-close")
+  .addEventListener("click", closeWcModal);
 
 document.querySelectorAll(".wc-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -863,7 +881,10 @@ const props = Astro.props
       rnContent = rnContent.replace(/<\/g>/gi, "</G>");
 
       // Remove attributes not valid in RN (stroke, stroke-width, clip-rule, fill-rule, etc)
-      rnContent = rnContent.replace(/\s*(stroke|stroke-width|stroke-linecap|stroke-linejoin|clip-rule|fill-rule)="[^"]*"/gi, "");
+      rnContent = rnContent.replace(
+        /\s*(stroke|stroke-width|stroke-linecap|stroke-linejoin|clip-rule|fill-rule)="[^"]*"/gi,
+        "",
+      );
 
       const rnCode = `import Svg, { Path, G } from 'react-native-svg';
 
@@ -902,7 +923,10 @@ function extractSvgPath(svgText) {
     let content = match[1].trim();
     content = content.replace(/<script[\s\S]*?<\/script>/gi, "");
     // Indent each line
-    return content.split("\n").map(line => "    " + line).join("\n");
+    return content
+      .split("\n")
+      .map((line) => "    " + line)
+      .join("\n");
   }
   return "";
 }
@@ -916,7 +940,7 @@ const pkgCopyBtnEl = document.getElementById("pkg-copy-btn");
 const pkgInstallCommands = {
   npm: "npm install @ninzapp/solar-icons",
   yarn: "yarn add @ninzapp/solar-icons",
-  pnpm: "pnpm add @ninzapp/solar-icons"
+  pnpm: "pnpm add @ninzapp/solar-icons",
 };
 
 function openPkgModal(pkgName) {
@@ -937,7 +961,9 @@ pkgModalEl.addEventListener("click", (e) => {
   }
 });
 
-document.getElementById("pkg-modal-close").addEventListener("click", closePkgModal);
+document
+  .getElementById("pkg-modal-close")
+  .addEventListener("click", closePkgModal);
 
 // Package buttons
 document.querySelectorAll(".pkg-btn").forEach((btn) => {
