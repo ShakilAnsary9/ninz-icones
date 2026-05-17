@@ -572,10 +572,10 @@ function handleModalAction(action, btn) {
 const iconSvg = \`${text.replace(/`/g, "\\`")}\`;
 
 // Or use as component
-import { Ninz${toPascalCase(style)}Icon } from '@ninzapp/ninz-icons';
+import { Ni${toPascalCase(name)} } from '@ninzapp/ninz-icons';
 
 function MyComponent() {
-  return <Ninz${toPascalCase(style)}Icon name="${name}" />;
+  return <Ni${toPascalCase(name)} />;
 }`;
       copyToClipboard(jsxCode, "JSX code copied!");
     });
@@ -733,7 +733,7 @@ function handleWcFramework(framework) {
   switch (framework) {
     case "vue": {
       const vueCode = `<script setup>
-defineOptions({ name: 'Si${componentName}' })
+defineOptions({ name: 'Ni${componentName}' })
 
 defineProps({
   size: { type: [String, Number], default: '1em' },
@@ -769,7 +769,7 @@ ${extractSvgPath(wcSvgText)}
 
 <script lang="ts">
 export default {
-  name: 'Si${componentName}'
+  name: 'Ni${componentName}'
 }
 </script>`;
       copyToClipboard(vueTsCode, "Vue + TS component copied!", true);
@@ -783,12 +783,12 @@ export default {
         .trim();
       const reactCode = `import React from 'react'
 
-export function Si${componentName}(props) {
+export function Ni${componentName}(props) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>${svgContent}</svg>
   )
 }
-export default Si${componentName}`;
+export default Ni${componentName}`;
       copyToClipboard(reactCode, "React component copied!");
       break;
     }
@@ -800,12 +800,12 @@ export default Si${componentName}`;
         .trim();
       const reactTsCode = `import React, { SVGProps } from 'react'
 
-export function Si${componentName}(props: SVGProps<SVGSVGElement>) {
+export function Ni${componentName}(props: SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>${svgContent}</svg>
   )
 }
-export default Si${componentName}`;
+export default Ni${componentName}`;
       copyToClipboard(reactTsCode, "React + TS component copied!");
       break;
     }
@@ -825,7 +825,7 @@ export default Si${componentName}`;
         .replace(/<\/svg>/i, "")
         .replace(/<script[\s\S]*?<\/script>/gi, "")
         .trim();
-      const qwikCode = `export function Si${componentName}(props: QwikIntrinsicElements['svg'], key: string) {
+      const qwikCode = `export function Ni${componentName}(props: QwikIntrinsicElements['svg'], key: string) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props} key={key}>${svgContent}</svg>
   )
@@ -839,7 +839,7 @@ export default Si${componentName}`;
         .replace(/<\/svg>/i, "")
         .replace(/<script[\s\S]*?<\/script>/gi, "")
         .trim();
-      const solidCode = `export function Si${componentName}(props: JSX.IntrinsicElements['svg']) {
+      const solidCode = `export function Ni${componentName}(props: JSX.IntrinsicElements['svg']) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>${svgContent}</svg>
   )
@@ -888,7 +888,7 @@ const props = Astro.props
 
       const rnCode = `import Svg, { Path, G } from 'react-native-svg';
 
-export function Si${componentName}(props) {
+export function Ni${componentName}(props) {
   return (
     <Svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">${rnContent}</Svg>
   )
