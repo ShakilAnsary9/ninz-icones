@@ -1093,7 +1093,9 @@ function handleDragOver(e) {
   e.dataTransfer.dropEffect = "move";
   const card = e.target.closest(".bulk-icon-card");
   if (card) {
-    document.querySelectorAll(".bulk-icon-card").forEach((c) => c.classList.remove("drag-over"));
+    document
+      .querySelectorAll(".bulk-icon-card")
+      .forEach((c) => c.classList.remove("drag-over"));
     card.classList.add("drag-over");
   }
 }
@@ -1109,16 +1111,22 @@ function handleDrop(e) {
   e.preventDefault();
   const card = e.target.closest(".bulk-icon-card");
   if (!card) return;
-  
+
   const dropIndex = parseInt(card.dataset.index);
   const currentDraggedIndex = parseInt(e.dataTransfer.getData("text/plain"));
-  
-  if (currentDraggedIndex !== null && !isNaN(dropIndex) && currentDraggedIndex !== dropIndex) {
+
+  if (
+    currentDraggedIndex !== null &&
+    !isNaN(dropIndex) &&
+    currentDraggedIndex !== dropIndex
+  ) {
     const item = selectedIcons.splice(currentDraggedIndex, 1)[0];
     selectedIcons.splice(dropIndex, 0, item);
     renderBulkDrawer();
   }
-  document.querySelectorAll(".bulk-icon-card").forEach((c) => c.classList.remove("drag-over"));
+  document
+    .querySelectorAll(".bulk-icon-card")
+    .forEach((c) => c.classList.remove("drag-over"));
 }
 
 bulkBag.addEventListener("click", () => {
@@ -1131,41 +1139,339 @@ function closeBulkDrawer() {
   document.body.style.overflow = "";
 }
 
-document.getElementById("bulk-drawer-close").addEventListener("click", closeBulkDrawer);
-document.getElementById("bulk-drawer-backdrop").addEventListener("click", closeBulkDrawer);
+document
+  .getElementById("bulk-drawer-close")
+  .addEventListener("click", closeBulkDrawer);
+document
+  .getElementById("bulk-drawer-backdrop")
+  .addEventListener("click", closeBulkDrawer);
 
 document.getElementById("bulk-clear-btn").addEventListener("click", () => {
   selectedIcons = [];
   updateBulkUI();
 });
 
-document.getElementById("bulk-download-btn").addEventListener("click", async () => {
-  if (selectedIcons.length === 0) return;
+document
+  .getElementById("bulk-download-btn")
+  .addEventListener("click", async () => {
+    if (selectedIcons.length === 0) return;
 
-  showToast("Preparing ZIP...");
+    showToast("Preparing ZIP...");
 
-  const zip = new JSZip();
+    const zip = new JSZip();
 
-  const fetchPromises = selectedIcons.map(async (icon) => {
-    try {
-      const response = await fetch(icon.imgSrc);
-      const svgText = await response.text();
-      zip.file(`${icon.name}.svg`, svgText);
-    } catch (e) {
-      console.error(`Failed to fetch ${icon.name}`);
-    }
+    const fetchPromises = selectedIcons.map(async (icon) => {
+      try {
+        const response = await fetch(icon.imgSrc);
+        const svgText = await response.text();
+        zip.file(`${icon.name}.svg`, svgText);
+      } catch (e) {
+        console.error(`Failed to fetch ${icon.name}`);
+      }
+    });
+
+    await Promise.all(fetchPromises);
+
+    const content = await zip.generateAsync({ type: "blob" });
+    const url = URL.createObjectURL(content);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "ninz-icons.zip";
+    a.click();
+    URL.revokeObjectURL(url);
+
+    showToast("ZIP downloaded!");
+    closeBulkDrawer();
   });
 
-  await Promise.all(fetchPromises);
+document
+  .getElementById("webfont-download-btn")
+  .addEventListener("click", async () => {
+    if (selectedIcons.length === 0) return;
 
-  const content = await zip.generateAsync({ type: "blob" });
-  const url = URL.createObjectURL(content);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "ninz-icons.zip";
-  a.click();
-  URL.revokeObjectURL(url);
+    showToast("Preparing Web Font Package...");
 
-  showToast("ZIP downloaded!");
-  closeBulkDrawer();
-});
+    const zip = new JSZip();
+    const folder = zip.folder("ninz-icons-webfont");
+
+    const fetchPromises = selectedIcons.map(async (icon) => {
+      try {
+        const response = await fetch(icon.imgSrc);
+        const svgText = await response.text();
+
+        const cleanSvg = svgText
+          .replace(/<svg[^>]*>/i, "")
+          .replace(/<\/svg>/i, "")
+          .trim();
+
+        const encodedSvg = encodeURIComponent(svgText);
+        const dataUrl = `data:image/svg+xml,${encodedSvg}`;
+
+        return { name: icon.name, svgText, cleanSvg, dataUrl };
+      } catch (e) {
+        console.error(`Failed to fetch ${icon.name}`);
+        return null;
+      }
+    });
+
+    const iconsData = await Promise.all(fetchPromises);
+    const validIcons = iconsData.filter(Boolean);
+
+    const hexCodes = {};
+    let code = 0xe000;
+    validIcons.forEach((icon) => {
+      hexCodes[icon.name] = code.toString(16);
+      code++;
+    });
+
+    const cssContent = `/* Ninz Icônes Web Font Package */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap');
+
+[class^="ni-"], [class*=" ni-"] {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+${validIcons
+  .map(
+    (icon) => `.ni-${icon.name} {
+  background-image: url("${icon.dataUrl}");
+}`,
+  )
+  .join("\n")}
+`;
+
+    const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ninz Icônes - Web Font Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Syne', sans-serif;
+      background: #0e0e10;
+      color: #f0f0f2;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 { margin-bottom: 10px; font-weight: 700; }
+    p { color: #8a8a96; margin-bottom: 30px; }
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .icon-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: #141416;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.07);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .icon-item:hover {
+      border-color: #e2ff5d;
+      background: #1a1a1e;
+    }
+    .icon-item i {
+      width: 24px;
+      height: 24px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .icon-item span {
+      font-size: 13px;
+      color: #8a8a96;
+    }
+    .usage-section {
+      margin-top: 40px;
+      padding: 24px;
+      background: #141416;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .usage-section h3 { margin-bottom: 16px; }
+    pre {
+      background: #0e0e10;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    code { color: #e2ff5d; }
+  </style>
+</head>
+<body>
+  <h1>Ninz Icônes Web Font</h1>
+  <p>${validIcons.length} icons available</p>
+  
+  <div class="icon-grid">
+    ${validIcons
+      .map((icon) => {
+        const svgWithStyle = icon.svgText
+          .replace(/<svg/, '<svg style="width:24px;height:24px"')
+          .replace(/stroke="currentColor"/g, 'stroke="#f0f0f2"')
+          .replace(/fill="currentColor"/g, 'fill="#f0f0f2"');
+        return `<div class="icon-item" onclick="copyIconCode('${icon.name}')">${svgWithStyle}<span>${icon.name}</span></div>`;
+      })
+      .join("")}
+  </div>
+
+  <script>
+    function copyIconCode(name) {
+      const code = '<i class="ni-' + name + '"></i>';
+      navigator.clipboard.writeText(code);
+      showToast('Copied: ' + code);
+    }
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      if (!t) {
+        const toast = document.createElement('div');
+        toast.id = 'toast';
+        toast.style.cssText = 'position:fixed;bottom:40px;left:50%;transform:translateX(-50%);background:#e2ff5d;color:#000;padding:12px 24px;border-radius:20px;font-size:14px;font-weight:600;z-index:9999';
+        document.body.appendChild(toast);
+        showToast(msg);
+        return;
+      }
+      t.textContent = msg;
+      t.style.display = 'block';
+      setTimeout(() => t.style.display = 'none', 2000);
+    }
+  </script>
+
+  <div class="usage-section">
+    <h3>How to use in your project:</h3>
+    <pre><code>&lt;link rel="stylesheet" href="ninz-icons.css" /&gt;
+
+&lt;i class="ni-${validIcons[0]?.name}"&gt;&lt;/i&gt;</code></pre>
+  </div>
+</body>
+</html>`;
+
+    folder.file("demo.html", htmlContent);
+
+    const fontCssContent = `/* Ninz Icônes Web Font */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&display=swap');
+
+[class^="ni-"], [class*=" ni-"] {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+
+${validIcons
+  .map(
+    (icon) => `.ni-${icon.name} {
+  background-image: url("${icon.dataUrl}");
+}`,
+  )
+  .join("\n")}
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: #0e0e10;
+  color: #f0f0f2;
+  padding: 40px;
+}
+h1 { margin-bottom: 10px; }
+p { color: #8a8a96; margin-bottom: 30px; }
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+.icon-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: #141416;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.icon-item:hover {
+  border-color: rgba(255,255,255,0.15);
+  background: #1a1a1e;
+}
+.icon-item i {
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.icon-item span {
+  font-size: 13px;
+  color: #8a8a96;
+}
+.usage-section {
+  margin-top: 40px;
+  padding: 24px;
+  background: #141416;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.usage-section h3 { margin-bottom: 16px; }
+pre {
+  background: #0e0e10;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 12px;
+}
+code { color: #e2ff5d; }`;
+
+    folder.file("fonts/ninz-icons.css", fontCssContent);
+
+    folder.file(
+      "ninz-icons.css",
+      `/* Ninz Icônes - Import the font CSS */
+@import url('fonts/ninz-icons.css');
+`,
+    );
+
+    function extractPathFromSvg(svgContent) {
+      const pathMatch = svgContent.match(/<path[^>]*d="([^"]+)"/);
+      if (pathMatch) return pathMatch[1];
+
+      const paths = [];
+      const pathRegex = /<path[^>]*d="([^"]+)"/g;
+      let match;
+      while ((match = pathRegex.exec(svgContent)) !== null) {
+        paths.push(match[1]);
+      }
+      return paths.join(" ");
+    }
+
+    const content = await zip.generateAsync({ type: "blob" });
+    const url = URL.createObjectURL(content);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "ninz-icons-webfont.zip";
+    a.click();
+    URL.revokeObjectURL(url);
+
+    showToast("Web Font Package downloaded!");
+    closeBulkDrawer();
+  });

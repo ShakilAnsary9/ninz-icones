@@ -1608,6 +1608,18 @@ body.light .modal-preview-img {
   transform: translateY(-1px);
 }
 
+.bulk-download-btn.secondary {
+  background: var(--bg-4);
+  color: var(--text-1);
+  border: 1px solid var(--border);
+}
+
+.bulk-download-btn.secondary:hover {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-color: var(--accent-glow);
+}
+
 .bulk-download-btn svg {
   width: 18px;
   height: 18px;
